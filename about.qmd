@@ -1,0 +1,20 @@
+---
+title: "About"
+toc: false
+---
+
+Practitioner-author writing on data science, marketing measurement, causal inference, and statistics.
+
+Most of the content here is cross-posted from LinkedIn (short-form) or written as long-form articles and research papers. The full archive lives in a separate [content repository](https://github.com/UnbiasedEstimation/content); this site shows the curated subset.
+
+## Topics
+
+- Statistics (Bayesian / frequentist debates, confidence vs. credible intervals, prior elicitation)
+- Causal inference (randomized experiments, A/B testing, synthetic control, MMM, geo-testing)
+- Marketing measurement (incrementality, attribution, ROAS science)
+
+## Find me elsewhere
+
+- LinkedIn: [oliver-brose](https://www.linkedin.com/in/oliver-brose/)
+- GitHub: [oliverbrose](https://github.com/oliverbrose)
+- Org: [UnbiasedEstimation](https://github.com/UnbiasedEstimation)

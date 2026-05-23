@@ -1,0 +1,30 @@
+---
+title: "Oliver Brose"
+listing:
+  - id: featured
+    contents:
+      - _content/**/*.qmd
+      - _content/**/*.md
+    type: default
+    fields: [date, title, description]
+    sort: "date desc"
+    max-items: 6
+    feed: false
+page-layout: full
+title-block-banner: false
+---
+
+::: {.hero-banner}
+
+# Oliver Brose
+
+Data science and marketing measurement. Practitioner writing on Bayesian / frequentist statistics, causal inference, A/B testing, MMM, geo-testing, and synthetic control.
+
+:::
+
+## Recent
+
+:::{#featured}
+:::
+
+[Browse all posts →](posts.qmd) &nbsp;·&nbsp; [Long-form articles →](articles.qmd) &nbsp;·&nbsp; [Papers →](papers.qmd)

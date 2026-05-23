@@ -1,0 +1,15 @@
+---
+title: "Papers"
+listing:
+  contents:
+    - _content/**/paper.qmd
+    - _content/**/paper.ipynb
+    - _content/**/paper.tex
+  type: default
+  fields: [date, title, description]
+  sort: "date desc"
+  feed: false
+page-layout: full
+---
+
+Research papers — formal write-ups, work in progress, and finalized publications.

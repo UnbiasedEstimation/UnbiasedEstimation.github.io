@@ -1,0 +1,15 @@
+---
+title: "Posts"
+listing:
+  contents:
+    - _content/**/linkedin.md
+    - "_content/**/!(index).md"
+  type: default
+  fields: [date, title, description]
+  sort: "date desc"
+  feed: true
+  categories: numbered
+page-layout: full
+---
+
+Short-form pieces — LinkedIn posts and commentary.

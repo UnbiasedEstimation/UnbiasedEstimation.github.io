@@ -1,0 +1,14 @@
+---
+title: "Articles"
+listing:
+  contents:
+    - _content/**/index.qmd
+  type: default
+  fields: [date, title, description, categories]
+  sort: "date desc"
+  feed: true
+  categories: numbered
+page-layout: full
+---
+
+Long-form articles — deeper dives on statistics, causal inference, and marketing measurement.

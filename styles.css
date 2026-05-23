@@ -1,0 +1,32 @@
+/* Site-wide tweaks for oliverbrose.github.io */
+
+/* Slightly tighter line-height for body text */
+.content {
+  line-height: 1.6;
+}
+
+/* Hero banner on the landing page */
+.hero-banner {
+  padding: 2rem 0 1rem 0;
+}
+
+.hero-banner h1 {
+  margin-top: 0;
+  font-weight: 700;
+}
+
+/* Listing date and title spacing */
+.quarto-listing-default .listing-item .listing-title {
+  font-weight: 600;
+}
+
+/* Subtler page-footer */
+.nav-footer {
+  font-size: 0.85rem;
+  color: var(--bs-secondary-color);
+}
+
+/* Tighter navbar */
+.navbar .navbar-brand {
+  font-weight: 600;
+}

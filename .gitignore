@@ -1,0 +1,20 @@
+# Quarto build output
+_site/
+_freeze/
+.quarto/
+
+# Synced content (pulled in at build time from the content repo)
+_content/
+_content_src/
+
+# Last sync manifest
+.last-sync.txt
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

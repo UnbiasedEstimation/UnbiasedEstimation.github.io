@@ -1,0 +1,46 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Oliver Brose"
+  description: "Data science and marketing measurement writing."
+  site-url: https://oliverbrose.github.io
+  search:
+    location: navbar
+    type: textbox
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: posts.qmd
+        text: Posts
+      - href: articles.qmd
+        text: Articles
+      - href: papers.qmd
+        text: Papers
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: https://github.com/oliverbrose
+        aria-label: GitHub
+      - icon: linkedin
+        href: https://www.linkedin.com/in/oliver-brose/
+        aria-label: LinkedIn
+  page-footer:
+    left: "© 2026 Oliver Brose"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    code-copy: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    citations-hover: true
+    footnotes-hover: true
+
+freeze: auto
