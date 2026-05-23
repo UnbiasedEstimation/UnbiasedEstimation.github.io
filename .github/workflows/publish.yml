@@ -1,0 +1,36 @@
+name: Publish site
+
+# Builds and deploys the Quarto site to GitHub Pages. Runs on every push
+# to main, plus a manual button (workflow_dispatch) for re-running.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write   # needed to push to gh-pages branch
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site repo
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Clone content repo and sync flagged articles
+        run: |
+          # Clone the content repo (public; no auth needed)
+          git clone --depth=1 https://github.com/UnbiasedEstimation/content.git _content_src
+          chmod +x scripts/sync-content.sh
+          ./scripts/sync-content.sh
+
+      - name: Render and publish to gh-pages
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

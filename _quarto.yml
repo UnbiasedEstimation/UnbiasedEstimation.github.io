@@ -5,7 +5,7 @@ project:
 website:
   title: "Oliver Brose"
   description: "Data science and marketing measurement writing."
-  site-url: https://oliverbrose.github.io
+  site-url: https://unbiasedestimation.github.io
   search:
     location: navbar
     type: textbox
@@ -21,7 +21,7 @@ website:
         text: CV
     right:
       - icon: github
-        href: https://github.com/oliverbrose
+        href: https://github.com/UnbiasedEstimation
         aria-label: GitHub
       - icon: linkedin
         href: https://www.linkedin.com/in/oliver-brose/
