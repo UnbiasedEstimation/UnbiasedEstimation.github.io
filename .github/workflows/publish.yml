@@ -22,9 +22,20 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Clone content repo and sync flagged articles
+        env:
+          # Personal Access Token with read access to UnbiasedEstimation/content.
+          # Required if the content repo is private; harmless if public (just unused).
+          # Add this in the site repo's Settings → Secrets and variables → Actions.
+          CONTENT_REPO_TOKEN: ${{ secrets.CONTENT_REPO_TOKEN }}
         run: |
-          # Clone the content repo (public; no auth needed)
-          git clone --depth=1 https://github.com/UnbiasedEstimation/content.git _content_src
+          # Authenticate the clone with the PAT when present, otherwise fall back
+          # to anonymous HTTPS (which works only if the content repo is public).
+          if [ -n "$CONTENT_REPO_TOKEN" ]; then
+            CLONE_URL="https://x-access-token:${CONTENT_REPO_TOKEN}@github.com/UnbiasedEstimation/content.git"
+          else
+            CLONE_URL="https://github.com/UnbiasedEstimation/content.git"
+          fi
+          git clone --depth=1 "$CLONE_URL" _content_src
           chmod +x scripts/sync-content.sh
           ./scripts/sync-content.sh
 
