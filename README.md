@@ -35,11 +35,11 @@ The `_content/` directory is gitignored and populated only by the sync script. T
 ```
 .
 ├── _quarto.yml                  Site-wide config (theme, navbar, etc.)
-├── index.qmd                    Landing page
-├── posts.qmd                    Listing: short-posts + LinkedIn pieces
-├── articles.qmd                 Listing: long-form articles
-├── papers.qmd                   Listing: research papers
-├── about.qmd                    About / bio
+├── index.qmd                    Home page (bio + recent posts)
+├── blog.qmd                     Blog listing (posts + long-form articles)
+├── papers.qmd                   Papers listing (research papers)
+├── cv.qmd                       CV page (text + link to cv.pdf)
+├── cv.pdf                       Downloadable CV (generated from content repo's cv/ LaTeX)
 ├── styles.css                   Site-wide CSS tweaks
 ├── scripts/
 │   └── sync-content.sh          Filter + copy from UnbiasedEstimation/content
@@ -48,6 +48,10 @@ The `_content/` directory is gitignored and populated only by the sync script. T
 ├── _site/                       Built site output (gitignored)
 └── .github/workflows/           CI (deferred — currently empty placeholder)
 ```
+
+## Navigation
+
+Top nav: **Home / Blog / Papers / CV** + GitHub and LinkedIn icons on the right. Matches the style of an academic personal site (e.g., kylebutts.com).
 
 ## Curation
 

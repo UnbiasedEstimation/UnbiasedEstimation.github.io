@@ -13,14 +13,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: posts.qmd
-        text: Posts
-      - href: articles.qmd
-        text: Articles
+      - href: blog.qmd
+        text: Blog
       - href: papers.qmd
         text: Papers
-      - href: about.qmd
-        text: About
+      - href: cv.qmd
+        text: CV
     right:
       - icon: github
         href: https://github.com/oliverbrose

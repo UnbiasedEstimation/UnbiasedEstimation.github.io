@@ -10,6 +10,10 @@ _content_src/
 # Last sync manifest
 .last-sync.txt
 
+# Note: cv.pdf at the repo root is TRACKED (not ignored) — it's the
+# downloadable CV linked from cv.qmd. Generate it from the content repo's
+# cv/ LaTeX templates and commit it.
+
 # OS / editor cruft
 .DS_Store
 Thumbs.db

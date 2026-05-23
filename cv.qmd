@@ -1,0 +1,55 @@
+---
+title: "CV"
+toc: false
+---
+
+::: {.cv-header}
+
+## Oliver Brose
+
+Data scientist working on causal inference, A/B testing, and marketing measurement.
+
+[Download CV (PDF)](cv.pdf){.btn .btn-outline-primary .btn-sm}
+
+:::
+
+---
+
+<!--
+The downloadable cv.pdf lives at the repo root and is generated from the
+LaTeX templates in the content repo (UnbiasedEstimation/content) under
+the cv/ folder. To refresh the PDF:
+
+  1. Edit YAML content in UnbiasedEstimation/content/cv/content/*.yaml
+  2. Generate the .tex via the AI-assisted workflow described in
+     UnbiasedEstimation/content/cv/README.md
+  3. Compile to PDF with pdflatex
+  4. Copy the resulting PDF here as cv.pdf and commit it
+
+Future improvement: automate via CI (render LaTeX → PDF → commit on build).
+-->
+
+## Summary
+
+A short summary paragraph — replace with your own bio. Background, current role, key interests.
+
+## Experience
+
+- **Role · Company · Years** — One-line description.
+- **Role · Company · Years** — One-line description.
+
+## Education
+
+- **Degree · Institution · Year** — Brief detail.
+
+## Selected publications
+
+See the [Papers](papers.qmd) page for the full list. Highlights:
+
+- Title of paper 1 — short description.
+- Title of paper 2 — short description.
+
+## Contact
+
+- GitHub: [oliverbrose](https://github.com/oliverbrose) · [UnbiasedEstimation](https://github.com/UnbiasedEstimation)
+- LinkedIn: [oliver-brose](https://www.linkedin.com/in/oliver-brose/)

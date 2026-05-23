@@ -1,0 +1,17 @@
+---
+title: "Blog"
+listing:
+  contents:
+    - _content/**/index.qmd
+    - _content/**/linkedin.md
+  exclude:
+    filename: "paper.*"
+  type: default
+  fields: [date, title, description, categories]
+  sort: "date desc"
+  feed: true
+  categories: numbered
+page-layout: full
+---
+
+Short-form posts, commentary, and long-form articles on statistics, causal inference, A/B testing, and marketing measurement.
