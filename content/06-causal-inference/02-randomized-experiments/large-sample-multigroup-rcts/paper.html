@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Oliver Brose">
+<meta name="dcterms.date" content="2026-07-28">
+
+<title>The Analysis of Multigroup Randomized Experiments in Large Sample Setups – Oliver Brose</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-7f2fd26b669c19c010417720255ddf26.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  </head><body class="nav-fixed quarto-light">heavy
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../../styles.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Oliver Brose</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../papers.html"> 
+<span class="menu-text">Papers</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/UnbiasedEstimation"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/oliver-brose/"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#sec-abstract" id="toc-sec-abstract" class="nav-link active" data-scroll-target="#sec-abstract">Abstract</a></li>
+  <li><a href="#sec-introduction" id="toc-sec-introduction" class="nav-link" data-scroll-target="#sec-introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-estimation-inference" id="toc-sec-estimation-inference" class="nav-link" data-scroll-target="#sec-estimation-inference"><span class="header-section-number">2</span> Estimation and Inference in Large Sample Setups</a>
+  <ul class="collapse">
+  <li><a href="#sec-general-framework" id="toc-sec-general-framework" class="nav-link" data-scroll-target="#sec-general-framework"><span class="header-section-number">2.1</span> General Framework</a></li>
+  <li><a href="#sec-simultaneous-inference" id="toc-sec-simultaneous-inference" class="nav-link" data-scroll-target="#sec-simultaneous-inference"><span class="header-section-number">2.2</span> Simultaneous Inference</a></li>
+  <li><a href="#sec-power" id="toc-sec-power" class="nav-link" data-scroll-target="#sec-power"><span class="header-section-number">2.3</span> Global Test</a></li>
+  <li><a href="#sec-contrasts" id="toc-sec-contrasts" class="nav-link" data-scroll-target="#sec-contrasts"><span class="header-section-number">2.4</span> Application to Contrasts</a>
+  <ul class="collapse">
+  <li><a href="#sec-causal-inference" id="toc-sec-causal-inference" class="nav-link" data-scroll-target="#sec-causal-inference"><span class="header-section-number">2.4.1</span> Contrasts in Multigroup Experiments</a></li>
+  <li><a href="#sec-contrast-inference" id="toc-sec-contrast-inference" class="nav-link" data-scroll-target="#sec-contrast-inference"><span class="header-section-number">2.4.2</span> Tests and Confidence Intervals</a></li>
+  <li><a href="#sec-power-analysis-contrasts" id="toc-sec-power-analysis-contrasts" class="nav-link" data-scroll-target="#sec-power-analysis-contrasts"><span class="header-section-number">2.4.3</span> Power Analysis and Sample Size Planning</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-procedures-designs" id="toc-sec-procedures-designs" class="nav-link" data-scroll-target="#sec-procedures-designs"><span class="header-section-number">3</span> Estimators</a>
+  <ul class="collapse">
+  <li><a href="#sec-unadjusted-analysis" id="toc-sec-unadjusted-analysis" class="nav-link" data-scroll-target="#sec-unadjusted-analysis"><span class="header-section-number">3.1</span> Group Sample Means</a></li>
+  </ul></li>
+  <li><a href="#sec-applications" id="toc-sec-applications" class="nav-link" data-scroll-target="#sec-applications"><span class="header-section-number">4</span> Applications</a>
+  <ul class="collapse">
+  <li><a href="#sec-pairwise-contrasts" id="toc-sec-pairwise-contrasts" class="nav-link" data-scroll-target="#sec-pairwise-contrasts"><span class="header-section-number">4.1</span> Contrasts</a></li>
+  <li><a href="#sec-optimal-conditions" id="toc-sec-optimal-conditions" class="nav-link" data-scroll-target="#sec-optimal-conditions"><span class="header-section-number">4.2</span> All-Pairwise Comparisons</a></li>
+  <li><a href="#sec-many-to-one" id="toc-sec-many-to-one" class="nav-link" data-scroll-target="#sec-many-to-one"><span class="header-section-number">4.3</span> Many-to-One Comparisons</a></li>
+  <li><a href="#sec-testing-equality" id="toc-sec-testing-equality" class="nav-link" data-scroll-target="#sec-testing-equality"><span class="header-section-number">4.4</span> Tests of Equality Across Groups</a></li>
+  <li><a href="#sec-factorial-designs" id="toc-sec-factorial-designs" class="nav-link" data-scroll-target="#sec-factorial-designs"><span class="header-section-number">4.5</span> Factorial Designs</a>
+  <ul class="collapse">
+  <li><a href="#sec-full-factorial" id="toc-sec-full-factorial" class="nav-link" data-scroll-target="#sec-full-factorial"><span class="header-section-number">4.5.1</span> Full Factorial Designs</a></li>
+  <li><a href="#sec-fractional-factorial" id="toc-sec-fractional-factorial" class="nav-link" data-scroll-target="#sec-fractional-factorial"><span class="header-section-number">4.5.2</span> Fractional Factorial Designs</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#sec-appendix" id="toc-sec-appendix" class="nav-link" data-scroll-target="#sec-appendix">Appendix</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Analysis of Multigroup Randomized Experiments in Large Sample Setups</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Oliver Brose </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 28, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-abstract" class="level1 unnumbered">
+<h1 class="unnumbered">Abstract</h1>
+<p>Randomized experiments involving more than two treatment groups are central to many problems in causal inference. While existing work in experimental design has predominantly emphasized parametric and nonparametric methods suited to small-sample settings, large-sample methods remain comparatively underexplored. This paper presents a systematic introduction to the analysis of multigroup randomized experiments from a large-sample perspective. We discuss techniques for estimation, hypothesis testing — including simultaneous, interval, and equivalence hypotheses — confidence interval construction, power analysis, and sample size determination, for linear contrasts of the group parameters and for smooth functions of them, based on group sample means. The framework is illustrated through contrast constructions for common tasks: all-pairwise comparisons for identifying optimal treatments among <span class="math inline">\(G\)</span> groups, many-to-one comparisons, tests of equality across groups, and full and fractional factorial designs.</p>
+</section>
+<section id="sec-introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Under proper conditions randomized controlled trials (RCTs) are often cited as the gold standard for causal inference <span class="citation" data-cites="rubin2008objective">(<a href="#ref-rubin2008objective" role="doc-biblioref">Rubin 2008</a>)</span>. One key goal is to estimate parameters that capture the causal influence of treatments on a selected population. Many specialized experimental designs are available. Some perform well for some tasks but may not be ideal for others.</p>
+<p>For example, two-group RCTs invest the available sample size <span class="math inline">\(N\)</span> into the comparison of two conditions. This makes it possible to maximize power for certain hypothesis tests under various allocation restrictions, like treatment costs or group size limitations <span class="citation" data-cites="jan2011optimal">(<a href="#ref-jan2011optimal" role="doc-biblioref">Jan and Shieh 2011</a>)</span>. Multigroup<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> experiments with <span class="math inline">\(G\)</span> groups allow the analysis of more — and different — questions in one experiment. For example, pairwise comparisons amongst <span class="math inline">\(G\)</span> conditions — or a subset of them — make it possible to find the best-performing treatment(s) in a single run <span class="citation" data-cites="herberich2010robust">(<a href="#ref-herberich2010robust" role="doc-biblioref">Herberich et al. 2010</a>)</span>. To screen efficiently through some or all of the <span class="math inline">\(G\)</span> treatments, a joint hypothesis test can be carried out to test whether the expected values of the outcome are identical across the <span class="math inline">\(G\)</span> groups, or a subset thereof. <span class="math inline">\(G-1\)</span> treatments can be compared against a baseline condition to screen for a better replacement treatment <span class="citation" data-cites="bretz2016multiple">(<a href="#ref-bretz2016multiple" role="doc-biblioref">Bretz et al. 2010</a>)</span>. Testing <span class="math inline">\(G\)</span> different dosages of a single factor allows the derivation of a dose-response relationship between the dosage and metrics of interest <span class="citation" data-cites="ritz2019dose">(<a href="#ref-ritz2019dose" role="doc-biblioref">Ritz et al. 2019</a>)</span>. Testing combinations of dosages of several treatment factors allows the derivation of the response surface of the variable(s) of interest <span class="citation" data-cites="myers2016response">(<a href="#ref-myers2016response" role="doc-biblioref">Myers et al. 2016</a>)</span>. In factorial experiments, groups are formed by distinct treatment factors in clever combinations simultaneously in a single experiment. Interaction between factors can be detected and can distinguish relevant from irrelevant factors via screening much faster than testing <em>one factor at a time</em> (OFAT), that is sequentially running two-group RCTs <span class="citation" data-cites="ledolter2007testing collins2014factorial box1978statistics wu2011experiments hinkelmann2007design hinkelmann2005design hinkelmann2012design cox2000theory">(<a href="#ref-ledolter2007testing" role="doc-biblioref">Ledolter and Swersey 2007</a>; <a href="#ref-collins2014factorial" role="doc-biblioref">Collins et al. 2014</a>; <a href="#ref-box1978statistics" role="doc-biblioref">Box et al. 1978</a>; <a href="#ref-wu2011experiments" role="doc-biblioref">Wu and Hamada 2011</a>; <a href="#ref-hinkelmann2007design" role="doc-biblioref">Hinkelmann and Kempthorne 2007</a>, <a href="#ref-hinkelmann2005design" role="doc-biblioref">2005</a>; <a href="#ref-hinkelmann2012design" role="doc-biblioref">Hinkelmann 2012</a>; <a href="#ref-cox2000theory" role="doc-biblioref">Cox and Reid 2000</a>)</span>.</p>
+<p>Popular introductory <em>Design of Experiments</em> (DoE) textbooks <span class="citation" data-cites="montgomery2017design box1978statistics wu2011experiments dean1999design">(<a href="#ref-montgomery2017design" role="doc-biblioref">Montgomery 2017</a>; <a href="#ref-box1978statistics" role="doc-biblioref">Box et al. 1978</a>; <a href="#ref-wu2011experiments" role="doc-biblioref">Wu and Hamada 2011</a>; <a href="#ref-dean1999design" role="doc-biblioref">Dean and Voss 1999</a>)</span> mainly focus on applications for engineering, biomedical sciences, psychology and other social sciences. Small sample sizes are typical in these domains, so that the presented methods are tailored for that case. Usually, parametric methods are presented that are specialized for certain setups, defined by the outcome variable<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, the data type (i.e.&nbsp;binary, normal or count data), the sample size configuration (i.e.&nbsp;equal or unequal sample sizes across the <span class="math inline">\(G\)</span> groups), and the group variances (i.e.&nbsp;homoscedasticity or heteroscedasticity). The parametric analysis of multigroup RCTs usually requires extensive manual statistical modeling, since different data types and sample size setups require specialized methods <span class="citation" data-cites="lewis1999analysis">(<a href="#ref-lewis1999analysis" role="doc-biblioref">Lewis et al. 1999</a>)</span>. Additionally, assumption checking like testing normality of the outcome and variance homoscedasticity of the <span class="math inline">\(G\)</span> groups is frequently required. Data transformation to make the data fit modeling assumptions is sometimes used, but can have unintended side effects, like changing the underlying null hypothesis <span class="citation" data-cites="changyong2014log">(<a href="#ref-changyong2014log" role="doc-biblioref">Feng et al. 2014</a>)</span>. Nonparametric alternatives to parametric tests are available <span class="citation" data-cites="brunner2001nonparametric hettmansperger2010robust">(<a href="#ref-brunner2001nonparametric" role="doc-biblioref">Brunner and Puri 2001</a>; <a href="#ref-hettmansperger2010robust" role="doc-biblioref">Hettmansperger and McKean 2010</a>)</span>. However, they may test different hypotheses than the parametric “counterpart” <span class="citation" data-cites="konietschke2023rankfd">(<a href="#ref-konietschke2023rankfd" role="doc-biblioref">Konietschke and Brunner 2023</a>)</span>. Overall, multigroup RCT analysis in small samples is labor intensive and requires strong statistical expertise.</p>
+<p>Most of these challenges disappear in large enough samples: Consistent and asymptotically normal estimators justify Wald-type tests and can be used for all numeric<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> data types (i.e.&nbsp;continuous, binary and count data), regardless of designed unequal sample size distributions for the groups and regardless of heteroscedasticity. Extensive assumption checking and statistical modeling is not required. This makes automated analysis of experiments possible.</p>
+<p>This large-sample approach to analyze multigroup RCTs is known <span class="citation" data-cites="pauly2015asymptotic hothorn2008simultaneous herberich2010robust">(<a href="#ref-pauly2015asymptotic" role="doc-biblioref">Pauly et al. 2015</a>; <a href="#ref-hothorn2008simultaneous" role="doc-biblioref">Hothorn et al. 2008</a>; <a href="#ref-herberich2010robust" role="doc-biblioref">Herberich et al. 2010</a>)</span>, but receives considerably less attention in introductory DoE textbooks. The hypothesized reason is that large sample sizes are rare in domains for which the usual DoE textbooks are written — i.e.&nbsp;engineering, biomedical sciences, psychology and other social sciences. However, RCTs in business settings often have sample sizes in the hundreds of thousands <span class="citation" data-cites="lewis2015unfavorable kohavi2013online">(<a href="#ref-lewis2015unfavorable" role="doc-biblioref">Lewis and Rao 2015</a>; <a href="#ref-kohavi2013online" role="doc-biblioref">Kohavi et al. 2013</a>)</span>, so that large-sample based methods for multigroup experiments are applicable.</p>
+<p>The goal of this paper is to give an introduction to large-sample estimation and inference for multigroup randomized experiments. Techniques for different tasks are discussed, for example full and fractional factorial designs, multigroup tests with the aim of many-to-one and all-pairwise comparisons, and the reporting of effects in percent of a baseline.</p>
+<p><a href="#sec-estimation-inference" class="quarto-xref">Section&nbsp;2</a> develops the general framework for estimation and global and simultaneous inference for linear and smooth transformations of the parameters; the parameters of interest in multigroup experiments — contrasts of group parameters — are defined and analyzed in <a href="#sec-contrasts" class="quarto-xref">Section&nbsp;2.4</a>. <a href="#sec-procedures-designs" class="quarto-xref">Section&nbsp;3</a> develops the group-sample-means estimator and shows that it satisfies the framework’s conditions. <a href="#sec-applications" class="quarto-xref">Section&nbsp;4</a> constructs contrast matrices for common multigroup tasks.</p>
+</section>
+<section id="sec-estimation-inference" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Estimation and Inference in Large Sample Setups</h1>
+<p><span class="citation" data-cites="hothorn2008simultaneous">Hothorn et al. (<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">2008</a>)</span>, Sec. 2, outlines a general framework for developing estimation and inference procedures for asymptotically normal estimators in large sample setups, whose variance-covariance matrix can be consistently estimated. The framework, for linear and smooth transformations of the parameters, is described in <a href="#sec-general-framework" class="quarto-xref">Section&nbsp;2.1</a>; simultaneous inference procedures are developed in <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>, the global Wald test with power and sample size planning in <a href="#sec-power" class="quarto-xref">Section&nbsp;2.3</a>; and the framework is applied to contrasts in <a href="#sec-contrasts" class="quarto-xref">Section&nbsp;2.4</a>.</p>
+<section id="sec-general-framework" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-general-framework"><span class="header-section-number">2.1</span> General Framework</h2>
+<p>Following <span class="citation" data-cites="hothorn2008simultaneous">Hothorn et al. (<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">2008</a>)</span>, let <span class="math inline">\(\mathbb{M}\big((S_1, \ldots, S_N), \theta, \eta\big)\)</span> denote a semiparametric statistical model for a set of <span class="math inline">\(N\)</span> observations <span class="math inline">\((S_1, \ldots, S_N)\)</span>. The model contains a fixed but unknown vector of elemental parameters of interest, <span class="math inline">\(\theta := (\theta_1, ..., \theta_P) \in \mathbb{R}^P\)</span>, and possibly further (random or nuisance) parameters <span class="math inline">\(\eta\)</span>.</p>
+<p>The observations are deliberately generic: an observation <span class="math inline">\(S_i\)</span> may be a cross-sectional scalar outcome or outcome–assignment–covariate record <span class="math inline">\((Y_i, T_i, X_i)\)</span>, a multivariate endpoint, or a panel record of repeated measurements on one unit with arbitrary within-unit dependence and possibly unit-specific length, accommodating staggered entry, dropout, and irregular measurement times. No structure is imposed on the <span class="math inline">\(S_i\)</span> beyond the two conditions <a href="#eq-asymptotically-normal-estimator" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-consistent-var-cov-estimator" class="quarto-xref">Equation&nbsp;2</a> below. The setting of this paper is a randomized experiment with <span class="math inline">\(G\)</span> treatment groups (<a href="#sec-causal-inference" class="quarto-xref">Section&nbsp;2.4.1</a>), although the framework applies equally to nonrandomized studies and other estimation problems. <span class="math inline">\(P\)</span> need not equal <span class="math inline">\(G\)</span>, since a group may contribute several parameters — one per metric or subgroup — or none.</p>
+<p>Denote <span class="math inline">\(\theta\)</span>’s estimator as <span class="math inline">\(\hat{\theta}:=(\hat{\theta}_1, ..., \hat{\theta}_P)\)</span> and its asymptotic variance-covariance matrix as <span class="math inline">\(\Sigma_{\sqrt{N}\hat{\theta}}^\infty\)</span>, and write <span class="math inline">\(\Sigma_{\hat{\theta}} := \Sigma_{\sqrt{N}\hat{\theta}}^\infty / N\)</span> for the covariance matrix of the normal approximation at sample size <span class="math inline">\(N\)</span>; the estimators are <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\hat{\theta}}^\infty\)</span> and <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span>. The matrix <span class="math inline">\(\Sigma_{\hat{\theta}}\)</span> need not equal the finite-sample covariance of <span class="math inline">\(\hat{\theta}\)</span>. Consider an asymptotically normal estimator <span class="math inline">\(\hat{\theta}\)</span>, <span id="eq-asymptotically-normal-estimator"><span class="math display">\[
+\sqrt{N}(\hat{\theta}-\theta) \xrightarrow{D} N(0,\Sigma_{\sqrt{N}\hat{\theta}}^\infty)
+\tag{1}\]</span></span></p>
+<p>whose variance-covariance matrix can be consistently estimated, in the sense <span id="eq-consistent-var-cov-estimator"><span class="math display">\[
+N \times \hat{\Sigma}_{\hat{\theta}}  \xrightarrow{P} \Sigma_{\sqrt{N}\hat{\theta}}^\infty.
+\tag{2}\]</span></span></p>
+<p>Accordingly, <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\hat{\theta}}^\infty := N \hat{\Sigma}_{\hat{\theta}}\)</span> serves as the estimator of <span class="math inline">\(\Sigma_{\sqrt{N}\hat{\theta}}^\infty\)</span>. For large enough sample sizes <span class="math inline">\(\hat{\theta}\)</span> can be treated as approximately multivariate normal, <span class="math display">\[
+\hat{\theta} \overset{a}{\sim} N(\theta, \Sigma_{\hat{\theta}}),
+\]</span> with <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span> used as computable replacement for the unknown <span class="math inline">\(\Sigma_{\hat{\theta}}\)</span>.</p>
+<p>Consider linear transformations <span class="math inline">\(\vartheta := H\theta\)</span> of the parameter vector, specified through a constant matrix <span class="math inline">\(H \in \mathbb{R}^{W \times P}\)</span>. The estimator <span class="math inline">\(\hat{\vartheta}:=H\hat{\theta}\)</span> consistently estimates <span class="math inline">\(\vartheta\)</span>, is asymptotically normal, and can be treated as approximately normal in large samples, <span class="math display">\[
+\hat{\vartheta} \overset{a}{\sim} N(\vartheta, \Sigma_{\hat{\vartheta}}),
+\qquad
+\Sigma_{\hat{\vartheta}}=H \Sigma_{\hat{\theta}} H',
+\]</span> with the estimator <span class="math inline">\(\hat{\Sigma}_{\hat{\vartheta}}=H \hat{\Sigma}_{\hat{\theta}} H'\)</span> as computable replacement of the unknown <span class="math inline">\(\Sigma_{\hat{\vartheta}}\)</span>.</p>
+<p>The same holds for a smooth transformation <span class="math inline">\(\vartheta := h(\theta)\)</span>, with its Jacobian in the role of <span class="math inline">\(H\)</span>. Let <span class="math inline">\(h\)</span> be differentiable in a neighbourhood of <span class="math inline">\(\theta\)</span> with a Jacobian that is continuous at <span class="math inline">\(\theta\)</span>, <span id="eq-jacobian-condition"><span class="math display">\[
+\mathbf{J}(\theta) := \frac{\partial h(\theta)}{\partial \theta'} \in \mathbb{R}^{W \times P},
+\qquad
+\mathbf{J}(\theta + u) \to \mathbf{J}(\theta) \quad (u \to 0).
+\tag{3}\]</span></span> Then <span class="math inline">\(\hat{\vartheta} := h(\hat{\theta})\)</span> consistently estimates <span class="math inline">\(\vartheta\)</span>. It is asymptotically normal <span class="citation" data-cites="serfling1980approximation">(<a href="#ref-serfling1980approximation" role="doc-biblioref">Serfling 1980</a>, Thm. 3.3A)</span> and can be treated as approximately normal in large samples, <span id="eq-delta-method"><span class="math display">\[
+\hat{\vartheta} \overset{a}{\sim} N(\vartheta, \Sigma_{\hat{\vartheta}}),
+\qquad
+\Sigma_{\hat{\vartheta}} = \mathbf{J}(\theta)\,\Sigma_{\hat{\theta}}\,\mathbf{J}(\theta)',
+\tag{4}\]</span></span> with the estimator <span class="math inline">\(\hat{\Sigma}_{\hat{\vartheta}} = \mathbf{J}(\hat{\theta})\,\hat{\Sigma}_{\hat{\theta}}\,\mathbf{J}(\hat{\theta})'\)</span> as computable replacement of the unknown <span class="math inline">\(\Sigma_{\hat{\vartheta}}\)</span>, consistent in the sense of <a href="#eq-consistent-var-cov-estimator" class="quarto-xref">Equation&nbsp;2</a> since <span class="math inline">\(\mathbf{J}(\hat{\theta}) \xrightarrow{P} \mathbf{J}(\theta)\)</span> by <a href="#eq-jacobian-condition" class="quarto-xref">Equation&nbsp;3</a>.</p>
+<p>The standardized estimator <span class="math inline">\(Z := \hat{\Lambda}^{-1/2}(\hat{\vartheta}-\vartheta)\)</span>, with <span class="math inline">\(\hat{\Lambda} := \operatorname{diag}(\hat{\Sigma}_{\hat{\vartheta}})\)</span>, is asymptotically normal and can be treated as approximately normal in large samples, <span class="math display">\[
+Z \overset{a}{\sim} N(0, \Sigma_Z),
+\qquad
+\Sigma_Z := \Lambda^{-1/2} \Sigma_{\hat{\vartheta}} \Lambda^{-1/2},
+\quad
+\Lambda := \operatorname{diag}(\Sigma_{\hat{\vartheta}}),
+\]</span> with the estimator <span class="math inline">\(\hat{\Sigma}_Z := \hat{\Lambda}^{-1/2} \hat{\Sigma}_{\hat{\vartheta}} \hat{\Lambda}^{-1/2}\)</span> as computable replacement of the unknown <span class="math inline">\(\Sigma_Z\)</span>, the asymptotic correlation matrix of <span class="math inline">\(\hat{\vartheta}\)</span>; both have unit diagonal.</p>
+<p>The statements of this section are large-sample approximations: at finite <span class="math inline">\(N\)</span> the distribution of <span class="math inline">\(\hat{\theta}\)</span> need not be normal, <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span> need not match the finite-sample covariance, and the actual level of a test can differ from the nominal one <span class="citation" data-cites="kiviet2012monte">(<a href="#ref-kiviet2012monte" role="doc-biblioref">Kiviet 2012, sec. 4</a>)</span>. By how much is a question for Monte Carlo simulation <span class="citation" data-cites="kiviet2012monte">(<a href="#ref-kiviet2012monte" role="doc-biblioref">Kiviet 2012, secs. 2–5</a>)</span>: fix a data generating process within <span class="math inline">\(\mathbb{M}\)</span> at a given sample size, draw independent samples <span class="math inline">\(r = 1, 2, \ldots\)</span> from it, and compute in each the estimates <span class="math inline">\(\hat{\theta}^{(r)}\)</span> and <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}^{(r)}\)</span>. Their empirical distribution estimates the sampling distribution of <span class="math inline">\(\hat{\theta}\)</span> and <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span>, and hence the bias and variance of <span class="math inline">\(\hat{\theta}\)</span>, the distribution of <span class="math inline">\(Z\)</span>, and the actual rejection and coverage probabilities; a grid of sample sizes, parameter values and distributions shows where the approximations hold.</p>
+</section>
+<section id="sec-simultaneous-inference" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-simultaneous-inference"><span class="header-section-number">2.2</span> Simultaneous Inference</h2>
+<p>We test <span class="math inline">\(W\)</span> null hypotheses on the coordinates of <span class="math inline">\(\vartheta\)</span>, <span class="math display">\[
+H_0^w\colon \vartheta_w = \vartheta_{0w}, \qquad w = 1, \ldots, W,
+\]</span> with the hypothesized values collected in <span class="math inline">\(\vartheta_0 := (\vartheta_{01}, \ldots, \vartheta_{0W})'\)</span>. Jointly they form the hypothesis <span class="math display">\[
+H_0\colon\;\vartheta=\vartheta_0\;\text{vs.}\;H_1\colon\; \vartheta \neq \vartheta_0,
+\]</span> the <em>general linear hypothesis</em> <span class="math inline">\(H\theta = \vartheta_0\)</span> of <span class="citation" data-cites="hothorn2008simultaneous">Hothorn et al. (<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">2008</a>)</span> when <span class="math inline">\(\vartheta = H\theta\)</span>; for <span class="math inline">\(\vartheta = h(\theta)\)</span> it is <span class="math inline">\(I_W\vartheta = \vartheta_0\)</span>, the identity matrix taking the role of <span class="math inline">\(H\)</span>. Under <span class="math inline">\(H_0\)</span> we have <span class="math display">\[
+Z = \hat{\Lambda}^{-1/2}(\hat{\vartheta}-\vartheta_0) \overset{a}{\sim} N(0, \Sigma_Z),
+\]</span> with <span class="math inline">\(\hat{\Sigma}_Z\)</span> as computable replacement of the unknown <span class="math inline">\(\Sigma_Z\)</span>. From here on <span class="math inline">\(Z\)</span> denotes this computable test statistic, centered at <span class="math inline">\(\vartheta_0\)</span>.</p>
+<p>Testing <span class="math inline">\(H_0^1, \ldots, H_0^W\)</span> together, as a <em>family</em> of hypotheses, requires an error criterion for the family rather than for each test alone, and a procedure that controls it. The criterion of this paper is the <em>familywise error rate</em> (FWER), the probability of rejecting at least one true hypothesis <span class="citation" data-cites="hothorn2008simultaneous bretz2016multiple">(<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">Hothorn et al. 2008</a>; <a href="#ref-bretz2016multiple" role="doc-biblioref">Bretz et al. 2010</a>)</span>; a procedure controls it at level <span class="math inline">\(\alpha\)</span> if this probability is asymptotically at most <span class="math inline">\(\alpha\)</span>, whichever of the <span class="math inline">\(H_0^w\)</span> are true.</p>
+<p><em>Single-step procedures</em> reject <span class="math inline">\(H_0^w\)</span> whenever <span class="math inline">\(|Z_w| &gt; q\)</span> for a common critical value <span class="math inline">\(q\)</span>, chosen such that under <span class="math inline">\(H_0\)</span>, where the FWER is largest, <span class="math display">\[
+\mathrm{FWER} = P\Big[\max_w |Z_w| &gt; q\Big] \le \alpha
+\]</span> in large samples.</p>
+<p>The <em>Bonferroni</em> procedure uses <span class="math inline">\(q = z_{1-\alpha/(2W)}\)</span>, where <span class="math inline">\(z_p\)</span> denotes the <span class="math inline">\(p\)</span>-quantile of the standard normal distribution with cdf <span class="math inline">\(\Phi_{0,1}\)</span>. By the union bound, <span class="math display">\[
+P\Big[\max_w |Z_w| &gt; q\Big] \;\le\; \sum_{w=1}^{W} P\big[|Z_w| &gt; q\big] \;\to\; \alpha,
+\]</span> since each term tends to <span class="math inline">\(\alpha/W\)</span>; the FWER is thus asymptotically at most <span class="math inline">\(\alpha\)</span>, whatever the correlations in <span class="math inline">\(\Sigma_Z\)</span>.</p>
+<p>The <em>Šidák</em> procedure uses <span class="math inline">\(q = z_{1-\alpha_S/2}\)</span> with <span class="math inline">\(\alpha_S := 1 - (1-\alpha)^{1/W}\)</span>. If the coordinates of <span class="math inline">\(Z\)</span> were independent, the FWER would tend to exactly <span class="math inline">\(\alpha\)</span>, <span class="math display">\[
+P\Big[\max_w |Z_w| \le q\Big] \;\to\; (1-\alpha_S)^W = 1 - \alpha;
+\]</span> for any correlation matrix the probability is at least as large <span class="citation" data-cites="sidak1967rectangular">(<a href="#ref-sidak1967rectangular" role="doc-biblioref">Šidák 1967</a>)</span>, so the FWER is asymptotically at most <span class="math inline">\(\alpha\)</span>. Since <span class="math inline">\(\alpha_S &gt; \alpha/W\)</span>, the critical value is slightly smaller than Bonferroni’s.</p>
+<p>The <em>single-step max-<span class="math inline">\(t\)</span> procedure</em> <span class="citation" data-cites="hothorn2008simultaneous">(<a href="#ref-hothorn2008simultaneous" role="doc-biblioref">Hothorn et al. 2008</a>)</span> uses the <span class="math inline">\((1-\alpha)\)</span>-quantile of <span class="math inline">\(\max_w |\zeta_w|\)</span> for <span class="math inline">\(\zeta \sim N(0, \hat{\Sigma}_Z)\)</span>, <span class="math inline">\(u_{1-\alpha} := u_{1-\alpha}(\hat{\Sigma}_Z)\)</span> defined by <span class="math display">\[
+P\Big[\max_w |\zeta_w| \le u_{1-\alpha}(\hat{\Sigma}_Z)\Big] = 1 - \alpha
+\]</span> and computed by numerical integration <span class="citation" data-cites="genz2009computation">(<a href="#ref-genz2009computation" role="doc-biblioref">Genz and Bretz 2009</a>)</span>; with <span class="math inline">\(q = u_{1-\alpha}\)</span> the FWER tends to <span class="math inline">\(\alpha\)</span>.</p>
+<p>Together with the per-test value <span class="math inline">\(z_{1-\alpha/2}\)</span>, the three critical values are ordered, <span class="math display">\[
+z_{1-\alpha/2} \;\le\; u_{1-\alpha}(\hat{\Sigma}_Z) \;\le\; z_{1-\alpha_S/2} \;\le\; z_{1-\alpha/(2W)},
+\]</span> with equality in the middle when <span class="math inline">\(\hat{\Sigma}_Z = I_W\)</span> and on the left when all correlations are <span class="math inline">\(\pm 1\)</span>: the max-<span class="math inline">\(t\)</span> procedure is the only one that uses the estimated correlations, and it is never more conservative than the other two.</p>
+<p>Replacing <span class="math inline">\(\vartheta_0\)</span> by <span class="math inline">\(\vartheta\)</span> turns <span class="math inline">\(Z\)</span> into the standardized estimator of <a href="#sec-general-framework" class="quarto-xref">Section&nbsp;2.1</a>, which is asymptotically <span class="math inline">\(N(0, \Sigma_Z)\)</span> under any hypothesis. For each of the three critical values <span class="math inline">\(q\)</span> the <span class="math inline">\(W\)</span> intervals <span class="math display">\[
+\hat{\vartheta}_w \pm q\sqrt{(\hat{\Sigma}_{\hat{\vartheta}})_{ww}}, \qquad w = 1, \ldots, W,
+\]</span> are therefore <em>simultaneous confidence intervals</em>: they cover all their parameters with asymptotic probability <span class="math inline">\(P[\max_w |\zeta_w| \le q]\)</span>, at least <span class="math inline">\(1-\alpha\)</span>, and exactly <span class="math inline">\(1-\alpha\)</span> with the shortest intervals for <span class="math inline">\(q = u_{1-\alpha}\)</span>.</p>
+</section>
+<section id="sec-power" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="sec-power"><span class="header-section-number">2.3</span> Global Test</h2>
+<p>Beyond deciding on the <span class="math inline">\(W\)</span> hypotheses <span class="math inline">\(H_0^w\)</span> one at a time with familywise calibration (<a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>), <span class="math inline">\(H_0\)</span> can be tested as one joint hypothesis with the well-known Wald test. If <span class="math inline">\(\Sigma_{\hat{\vartheta}}\)</span> is positive definite, its test statistic, the <em>Wald-type statistic</em> (WTS), is asymptotically <span class="math inline">\(\chi^2\)</span> distributed with <span class="math inline">\(W\)</span> degrees of freedom under <span class="math inline">\(H_0\)</span>, <span id="eq-WTS"><span class="math display">\[
+\begin{aligned}
+WTS &amp;:= (\hat{\vartheta}-\vartheta_0)'\hat{\Sigma}_{\hat{\vartheta}}^{-1}(\hat{\vartheta}-\vartheta_0) \\
+&amp;= N (\hat{\vartheta}-\vartheta_0)'(H\hat{\Sigma}_{\sqrt{N}\hat{\theta}}^\infty H')^{-1}(\hat{\vartheta}-\vartheta_0) \xrightarrow[N \to \infty]{D} \chi_W^2.
+\end{aligned}
+\tag{5}\]</span></span></p>
+<p>Under local alternatives, with <span class="math inline">\(\vartheta - \vartheta_0\)</span> of order <span class="math inline">\(N^{-1/2}\)</span>, the WTS approximately follows a noncentral <span class="math inline">\(\chi^2\)</span> distribution <span class="citation" data-cites="rao1973linear">(<a href="#ref-rao1973linear" role="doc-biblioref">Rao 1973, sec. 3b</a>)</span>, <span id="eq-wts-alternative"><span class="math display">\[
+\begin{aligned}
+WTS &amp;\overset{a}{\sim} \chi^2_W(\lambda_N), \qquad \lambda_N = N\Delta^2, \\
+\Delta^2 &amp;= (\vartheta - \vartheta_0)'\left(H\Sigma_{\sqrt{N}\hat{\theta}}^\infty H'\right)^{-1}(\vartheta - \vartheta_0).
+\end{aligned}
+\tag{6}\]</span></span> This approximation is standard large-sample theory <span class="citation" data-cites="stroud1973noncentral vandervaart1998asymptotic">(<a href="#ref-stroud1973noncentral" role="doc-biblioref">Stroud 1973</a>; <a href="#ref-vandervaart1998asymptotic" role="doc-biblioref">Vaart 1998</a>, Ch. 16)</span> and is used for planning at fixed alternatives as well (accuracy for <span class="math inline">\(W = 1\)</span>, where <span class="math inline">\(WTS = Z^2\)</span>: Appendix, derivation of <a href="#eq-noncentrality" class="quarto-xref">Equation&nbsp;11</a>). The level-<span class="math inline">\(\alpha\)</span> test rejects the null hypothesis if <span class="math inline">\(WTS &gt; \chi^2_{W,1-\alpha}\)</span>. Its approximate power is <span id="eq-power"><span class="math display">\[
+\pi(\theta, N) = 1 - F_{W,\lambda_N}\!\left(\chi^2_{W,1-\alpha}\right),
+\tag{7}\]</span></span> where <span class="math inline">\(F_{W,\xi}\)</span> denotes the cdf of <span class="math inline">\(\chi^2_W(\xi)\)</span>, which is strictly decreasing in <span class="math inline">\(\xi\)</span> <span class="citation" data-cites="ghosh1973monotonicity">(<a href="#ref-ghosh1973monotonicity" role="doc-biblioref">Ghosh 1973</a>)</span>. For a target power <span class="math inline">\(1 - \beta &gt; \alpha\)</span> the minimal sample size is therefore <span class="math inline">\(N^* = \lceil \xi^*(W, \alpha, \beta)/\Delta^2 \rceil\)</span>, with <span class="math inline">\(\xi^*\)</span> the unique root of <span class="math inline">\(F_{W,\xi}(\chi^2_{W,1-\alpha}) = \beta\)</span> <span class="citation" data-cites="shieh2005power">(<a href="#ref-shieh2005power" role="doc-biblioref">Shieh 2005</a>)</span>. The noncentrality input <span class="math inline">\(\Delta^2\)</span> is estimator-specific; for group sample means it becomes explicit in <a href="#sec-testing-equality" class="quarto-xref">Section&nbsp;4.4</a>.</p>
+<p>In small samples the <span class="math inline">\(\chi^2_W\)</span> calibration can be liberal; power is then better assessed by simulation <span class="citation" data-cites="pauly2015asymptotic konietschke2015parametric">(<a href="#ref-pauly2015asymptotic" role="doc-biblioref">Pauly et al. 2015</a>; <a href="#ref-konietschke2015parametric" role="doc-biblioref">Konietschke et al. 2015</a>)</span>.</p>
+</section>
+<section id="sec-contrasts" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-contrasts"><span class="header-section-number">2.4</span> Application to Contrasts</h2>
+<section id="sec-causal-inference" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="sec-causal-inference"><span class="header-section-number">2.4.1</span> Contrasts in Multigroup Experiments</h3>
+<p>Consider a randomized experiment with <span class="math inline">\(G\)</span> groups. Each group <span class="math inline">\(g\)</span> receives a different treatment, which may arise either from a single factor<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <span class="math inline">\(f\)</span> with <span class="math inline">\(L_f = G\)</span> levels, or from a combination of <span class="math inline">\(K\)</span> distinct factors <span class="math inline">\(f_1, \ldots, f_K\)</span>, each with <span class="math inline">\(L_{f_k}\)</span> levels. Let the distribution of the outcome metric <span class="math inline">\(Y\)</span> under group <span class="math inline">\(g\)</span> be denoted <span class="math inline">\(F_g\)</span>, and write <span class="math inline">\(Y(g)\)</span> for the (potential) outcome of <span class="math inline">\(Y\)</span> under assignment to group <span class="math inline">\(g\)</span>, so that <span class="math inline">\(Y(g) \sim F_g\)</span>. The primary interest is typically in comparing parameters <span class="math inline">\(\theta_g\)</span> of <span class="math inline">\(F_g\)</span>, such as means or medians. A principled way to compare parameters across conditions is via contrasts. A contrast <span class="math inline">\(C\)</span> is defined as a linear combination of the parameters <span class="math inline">\(\theta = (\theta_1, \ldots, \theta_G)'\)</span> — here the framework’s dimension is <span class="math inline">\(P = G\)</span>, one parameter per group — with fixed, user-specified weights <span class="math inline">\(c = (c_1, \ldots, c_G)\)</span> satisfying <span class="math inline">\(\sum_{g=1}^G c_g = 0\)</span>, <span class="math display">\[
+C := c \theta = \sum_{g=1}^G c_g \theta_g.
+\]</span> A comprehensive introduction to contrasts is provided by <span class="citation" data-cites="wiens2017performing">Wiens and Nilsson (<a href="#ref-wiens2017performing" role="doc-biblioref">2017</a>)</span>. A contrast involving only two parameters is known as a <em>pairwise comparison</em>. For instance, the average treatment effect (ATE) comparing group 1 to group 2 is obtained, when <span class="math inline">\(\theta_g = \mu_g := E[Y(g)]\)</span> is the group mean, using the weight vector <span class="math inline">\(c = (1, -1, 0, \ldots, 0)\)</span>, resulting in <span class="math display">\[
+C = c \theta = \theta_1 - \theta_2 = \mu_1 - \mu_2 =: \text{ATE}(1, 2).
+\]</span></p>
+<p>As a second example, consider a <span class="math inline">\(2 \times 2\)</span> full factorial experiment with two binary factors, denoted <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. Each factor has two levels, labeled generically as level <span class="math inline">\(0\)</span> and level <span class="math inline">\(1\)</span>, so that the four treatment groups correspond to the combinations <span class="math inline">\((A=0, B=0)\)</span>, <span class="math inline">\((A=1, B=0)\)</span>, <span class="math inline">\((A=0, B=1)\)</span>, and <span class="math inline">\((A=1, B=1)\)</span>. Let <span class="math inline">\(\mu_1, \mu_2, \mu_3, \mu_4\)</span> denote the corresponding group means. The main effect of factor <span class="math inline">\(A\)</span> can be expressed as the average difference in outcomes when <span class="math inline">\(A\)</span> changes from level 0 to level 1, averaged over the levels of <span class="math inline">\(B\)</span>, <span class="math display">\[
+C = \frac{1}{2}(\mu_2 + \mu_4) - \frac{1}{2}(\mu_1 + \mu_3),
+\]</span> with associated contrast weights <span class="math inline">\(c = (-\tfrac{1}{2}, \tfrac{1}{2}, -\tfrac{1}{2}, \tfrac{1}{2})\)</span>. The interaction effect between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> corresponds to the extent to which the effect of <span class="math inline">\(A\)</span> differs across levels of <span class="math inline">\(B\)</span>, <span class="math display">\[
+C = \mu_1 - \mu_2 - \mu_3 + \mu_4,
+\]</span> with contrast weights <span class="math inline">\(c = (1, -1, -1, 1)\)</span>. Multiple contrasts can be evaluated jointly by stacking the corresponding weight vectors <span class="math inline">\(c^{(w)} = (c_{w1}, \ldots, c_{wG})\)</span> for <span class="math inline">\(w = 1, \ldots, W\)</span> into a <span class="math inline">\(W \times G\)</span> contrast matrix <span class="math inline">\(H\)</span>, yielding a vector of contrasts, <span class="math inline">\(C = H \theta\)</span>.</p>
+</section>
+<section id="sec-contrast-inference" class="level3" data-number="2.4.2">
+<h3 data-number="2.4.2" class="anchored" data-anchor-id="sec-contrast-inference"><span class="header-section-number">2.4.2</span> Tests and Confidence Intervals</h3>
+<p>The framework applies to contrasts by setting <span class="math inline">\(H=c=(c_1, ..., c_G)\)</span>. The contrast and its estimator are given by <span class="math display">\[
+\vartheta = H\theta = \sum_{g=1}^{G}c_g\theta_g=:C\;\text{and}\; \hat{\vartheta}= H\hat{\theta}=\sum_{g=1}^{G}c_g\hat{\theta}_g=:\hat{C}.
+\]</span> For large enough sample sizes it follows that <span class="math inline">\(\hat{\vartheta}= \hat{C} \overset{a}{\sim} N(C, \Sigma_{\hat{C}})\)</span>, with <span id="eq-contrast-variance"><span class="math display">\[
+\Sigma_{\hat{C}} = c \Sigma_{\hat{\theta}} c' = \sum_{g=1}^{G} c_g^2 (\Sigma_{\hat{\theta}})_{gg} + 2\sum_{g=1}^{G} \sum_{l:l&gt;g}^{G} c_g c_l (\Sigma_{\hat{\theta}})_{gl}
+\tag{8}\]</span></span></p>
+<p>which can be estimated using <span id="eq-contrast-variance-estimator"><span class="math display">\[
+\widehat{\text{Var}}[\hat{C}]=\hat{\Sigma}_{\hat{C}}= c \hat{\Sigma}_{\hat{\theta}} c' = \sum_{g=1}^{G} c_g^2 \widehat{\text{Var}}[\hat{\theta}_g] + 2\sum_{g=1}^{G} \sum_{l:l&gt;g}^{G} c_g c_l \widehat{\text{Cov}}[\hat{\theta}_g, \hat{\theta}_l].
+\tag{9}\]</span></span></p>
+<p>If <span class="math inline">\(\hat{\theta}\)</span> is a consistent estimator for <span class="math inline">\(\theta\)</span>, <span class="math inline">\(\hat{C}\)</span> is a consistent estimator for a contrast <span class="math inline">\(C\)</span>. The null hypothesis for a two-tailed test is <span class="math display">\[
+H_0\colon\; C = C_0 \;\text{vs.}\; H_1\colon\; C \neq C_0,
+\]</span> and the test statistic <span class="math inline">\(Z\)</span> of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>, here scalar, is asymptotically standard normal under <span class="math inline">\(H_0\)</span>, <span id="eq-standardized-test-statistic"><span class="math display">\[
+Z = \hat{\Sigma}_{\hat{C}}^{-1/2}(\hat{C}-C_0) = \frac{\hat{C} - C_0}{\sqrt{\widehat{\text{Var}}[\hat{C}]}} \xrightarrow[N \to \infty]{D} N(0, 1).
+\tag{10}\]</span></span> Inverting it over <span class="math inline">\(C_0\)</span> gives the <span class="math inline">\(1-\alpha\)</span> confidence set <span class="math display">\[
+\mathcal{C}_{two}^{1-\alpha} := \big[\hat{C} - z_{1-\alpha/2} \sqrt{\widehat{\text{Var}}[\hat{C}]},\;\hat{C} + z_{1-\alpha/2} \sqrt{\widehat{\text{Var}}[\hat{C}]}\big].
+\]</span> The null hypothesis is rejected at level <span class="math inline">\(\alpha\)</span> if the realized statistic <span class="math inline">\(Z = z\)</span> falls into the rejection region, if the <span class="math inline">\(p\)</span>-value — the tail probability beyond <span class="math inline">\(z\)</span> under <span class="math inline">\(H_0\)</span> — is below <span class="math inline">\(\alpha\)</span>, or if <span class="math inline">\(C_0\)</span> lies outside the confidence set; the three are one criterion: <span class="math display">\[
+\begin{aligned}
+&amp;z \in \mathcal{R}_{two} = \{z : |z| &gt; z_{1-\alpha/2}\} \\
+&amp;\iff p_{two} = 2\,(1-\Phi_{0,1}(|z|)) &lt; \alpha \\
+&amp;\iff C_0 \notin \mathcal{C}_{two}^{1-\alpha}.
+\end{aligned}
+\]</span></p>
+<p>For a right-tailed test the null hypothesis <span class="math display">\[
+H_0\colon\; C \leq C_0 \;\text{vs.}\; H_1\colon\; C &gt; C_0
+\]</span> has the confidence set <span class="math display">\[
+\mathcal{C}_{right}^{1-\alpha} := \big[\hat{C} - z_{1-\alpha}\sqrt{\widehat{\text{Var}}[\hat{C}]},\;\infty\big)
+\]</span> and is rejected at level <span class="math inline">\(\alpha\)</span> if <span class="math display">\[
+\begin{aligned}
+&amp;z \in \mathcal{R}_{right} = \{z : z &gt; z_{1-\alpha}\} \\
+&amp;\iff p_{right} = 1-\Phi_{0,1}(z) &lt; \alpha \\
+&amp;\iff C_0 \notin \mathcal{C}_{right}^{1-\alpha}.
+\end{aligned}
+\]</span></p>
+<p>For a left-tailed test the null hypothesis <span class="math display">\[
+H_0\colon\; C \geq C_0 \;\text{vs.}\; H_1\colon\; C &lt; C_0
+\]</span> has the confidence set <span class="math display">\[
+\mathcal{C}_{left}^{1-\alpha} := \big(-\infty,\;\hat{C} + z_{1-\alpha}\sqrt{\widehat{\text{Var}}[\hat{C}]}\big]
+\]</span> and is rejected at level <span class="math inline">\(\alpha\)</span> if <span class="math display">\[
+\begin{aligned}
+&amp;z \in \mathcal{R}_{left} = \{z : z &lt; -z_{1-\alpha}\} \\
+&amp;\iff p_{left} = \Phi_{0,1}(z) &lt; \alpha \\
+&amp;\iff C_0 \notin \mathcal{C}_{left}^{1-\alpha}.
+\end{aligned}
+\]</span></p>
+<p>Point null hypotheses of the form <span class="math inline">\(H_0 : C = C_0\)</span> are often unrealistically precise and rarely, if ever, true. Additionally, even tiny differences from <span class="math inline">\(C_0\)</span> can lead to rejection — here “statistical significance” might not lead to “practical significance”. A general remedy is <em>interval null hypothesis testing</em>, which replaces the point <span class="math inline">\(C_0\)</span> by a pre-specified interval <span class="math inline">\([C_L, C_U]\)</span> of practically irrelevant values and works with the two-sided confidence set at level <span class="math inline">\(1 - 2\alpha\)</span>, <span class="math inline">\(\mathcal{C}_{two}^{1-2\alpha}\)</span>, and the one-sided statistics <span class="math display">\[
+Z_L := \frac{\hat{C} - C_L}{\sqrt{\widehat{\text{Var}}[\hat{C}]}}, \qquad
+Z_U := \frac{C_U - \hat{C}}{\sqrt{\widehat{\text{Var}}[\hat{C}]}}.
+\]</span> The hypothesis <span class="math display">\[
+H_0\colon\; C \in [C_L, C_U] \;\text{vs.}\; H_1\colon\; C \notin [C_L, C_U]
+\]</span> is rejected at level <span class="math inline">\(\alpha\)</span> if <span class="math display">\[
+\begin{aligned}
+&amp;\min\{z_L, z_U\} &lt; -z_{1-\alpha} \\
+&amp;\iff p = \min\{\Phi_{0,1}(z_L),\, \Phi_{0,1}(z_U)\} &lt; \alpha \\
+&amp;\iff \mathcal{C}_{two}^{1-2\alpha} \cap [C_L, C_U] = \emptyset,
+\end{aligned}
+\]</span> and the <em>equivalence</em> hypothesis <span class="math display">\[
+H_0\colon\; C \notin [C_L, C_U] \;\text{vs.}\; H_1\colon\; C \in [C_L, C_U],
+\]</span> tested by two one-sided tests (TOST) <span class="citation" data-cites="schuirmann1987comparison wellek2010testing">(<a href="#ref-schuirmann1987comparison" role="doc-biblioref">Schuirmann 1987</a>; <a href="#ref-wellek2010testing" role="doc-biblioref">Wellek 2010</a>)</span>, is rejected at level <span class="math inline">\(\alpha\)</span> if <span class="math display">\[
+\begin{aligned}
+&amp;\min\{z_L, z_U\} &gt; z_{1-\alpha} \\
+&amp;\iff p = \max\{1-\Phi_{0,1}(z_L),\, 1-\Phi_{0,1}(z_U)\} &lt; \alpha \\
+&amp;\iff \mathcal{C}_{two}^{1-2\alpha} \subseteq [C_L, C_U].
+\end{aligned}
+\]</span> Both tests have asymptotic size <span class="math inline">\(\alpha\)</span>, attained on the boundary of the null interval. The <em>minimum effect test</em> (superiority test) is the interval null test with <span class="math inline">\([C_L, C_U] = [-\delta_0, \delta_0]\)</span>:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> an effect is declared practically relevant when <span class="math inline">\(\mathcal{C}_{two}^{1-2\alpha}\)</span> lies entirely outside <span class="math inline">\([-\delta_0, \delta_0]\)</span>.</p>
+<p>For families of contrasts, stacked into a contrast matrix <span class="math inline">\(H\)</span>, the simultaneous and global procedures of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a> and <a href="#sec-power" class="quarto-xref">Section&nbsp;2.3</a> apply directly: in the two-sided rules and confidence sets above, <span class="math inline">\(z_{1-\alpha/2}\)</span> is replaced by the common critical value <span class="math inline">\(q\)</span> of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>, which turns <span class="math inline">\(\mathcal{C}^{1-\alpha}_{two}\)</span>, row by row, into the simultaneous confidence intervals of that section.</p>
+</section>
+<section id="sec-power-analysis-contrasts" class="level3" data-number="2.4.3">
+<h3 data-number="2.4.3" class="anchored" data-anchor-id="sec-power-analysis-contrasts"><span class="header-section-number">2.4.3</span> Power Analysis and Sample Size Planning</h3>
+<p>The <em>effect</em> <span class="math inline">\(\delta := C - C_0\)</span> measures the displacement of the true contrast value <span class="math inline">\(C\)</span> from the hypothesized value <span class="math inline">\(C_0\)</span>; the alternative corresponds to <span class="math inline">\(\delta \neq 0\)</span>. Under local alternatives, with <span class="math inline">\(\delta\)</span> of order <span class="math inline">\(N^{-1/2}\)</span>, the test statistic <a href="#eq-standardized-test-statistic" class="quarto-xref">Equation&nbsp;10</a> is approximately noncentral normal <span class="citation" data-cites="vandervaart1998asymptotic">(<a href="#ref-vandervaart1998asymptotic" role="doc-biblioref">Vaart 1998</a>)</span> (derivation and scope in the Appendix),</p>
+<p><span id="eq-noncentrality"><span class="math display">\[
+\begin{aligned}
+Z &amp;\;\overset{a}{\sim}\; N(\lambda, 1), \\
+\lambda &amp;:= \delta \sqrt{N / \bar{V}_C}, \\
+\bar{V}_C &amp;:= c\, \Sigma^{\infty}_{\sqrt{N}\hat{\theta}}\, c'.
+\end{aligned}
+\tag{11}\]</span></span></p>
+<p>The power of the two-sided level-<span class="math inline">\(\alpha\)</span> test is, up to a conservative approximation (Appendix),</p>
+<p><span id="eq-power-function"><span class="math display">\[
+\pi \approx \Phi_{0,1}(|\lambda| - z_{1-\alpha/2}).
+\tag{12}\]</span></span></p>
+<p>Setting the target <span class="math inline">\(\pi = 1 - \beta\)</span> and inverting yields one equation in the five quantities <span class="math inline">\((\alpha, \beta, \delta, \bar{V}_C, N)\)</span>; a power calculation fixes four of them and solves for the fifth <span class="citation" data-cites="cohen1988statistical">(<a href="#ref-cohen1988statistical" role="doc-biblioref">Cohen 1988</a>)</span>. Solving for the sample size and, at fixed <span class="math inline">\(N\)</span>, for the <em>minimum detectable effect</em> gives</p>
+<p><span id="eq-power-sample-size"><span class="math display">\[
+N \ge \frac{(z_{1-\alpha/2} + z_{1-\beta})^2\, \bar{V}_C}{\delta^2},
+\qquad
+\delta_{\min} = (z_{1-\alpha/2} + z_{1-\beta}) \sqrt{\bar{V}_C / N};
+\tag{13}\]</span></span></p>
+<p>for one-sided tests <span class="math inline">\(z_{1-\alpha/2}\)</span> is replaced by <span class="math inline">\(z_{1-\alpha}\)</span>. Power depends on the estimator and design only through <span class="math inline">\(\bar{V}_C\)</span>; its explicit form, and its optimization over the design, are given for group sample means in <a href="#sec-pairwise-contrasts" class="quarto-xref">Section&nbsp;4.1</a>.</p>
+<p>Sample size planning can also target the length <span class="math inline">\(L := 2\, z_{1-\alpha/2} \sqrt{\widehat{\text{Var}}[\hat{C}]}\)</span> of the confidence interval the experiment will report — <em>accuracy in parameter estimation</em> (AIPE) or planning for precision <span class="citation" data-cites="kelley2003obtaining maxwell2008sample rothman2018planning lai2012accuracy liu2009sample grieve1991confidence">(<a href="#ref-kelley2003obtaining" role="doc-biblioref">Kelley et al. 2003</a>; <a href="#ref-maxwell2008sample" role="doc-biblioref">Maxwell et al. 2008</a>; <a href="#ref-rothman2018planning" role="doc-biblioref">Rothman and Greenland 2018</a>; <a href="#ref-lai2012accuracy" role="doc-biblioref">Lai and Kelley 2012</a>; <a href="#ref-liu2009sample" role="doc-biblioref">Liu 2009</a>; <a href="#ref-grieve1991confidence" role="doc-biblioref">Grieve 1991</a>)</span> — which requires no postulated effect size. Since <span class="math inline">\(N\,\widehat{\text{Var}}[\hat{C}] \xrightarrow{P} \bar{V}_C\)</span>, the expected length and the sample size reaching a target expected length <span class="math inline">\(\ell\)</span> are</p>
+<p><span class="math display">\[
+E[L] \approx 2\, z_{1-\alpha/2} \sqrt{\bar{V}_C / N},
+\qquad
+N \ge \frac{4\, z_{1-\alpha/2}^2\, \bar{V}_C}{\ell^2}.
+\]</span></p>
+<p>Conversely, an experiment powered at <span class="math inline">\((\alpha, 1-\beta)\)</span> for an effect <span class="math inline">\(\delta\)</span> reports intervals of expected length</p>
+<p><span class="math display">\[
+E[L] \approx 2 z_{1-\alpha/2}\, \delta / (z_{1-\alpha/2} + z_{1-\beta}),
+\]</span></p>
+<p>which is <span class="math inline">\(\approx 1.4\,\delta\)</span> at <span class="math inline">\((\alpha, 1-\beta) = (0.05, 0.80)\)</span>. Since <span class="math inline">\(L\)</span> fluctuates around its expectation, a design meeting <span class="math inline">\(E[L] \le \ell\)</span> still produces <span class="math inline">\(L &gt; \ell\)</span> in roughly half of all realizations.</p>
+</section>
+</section>
+</section>
+<section id="sec-procedures-designs" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Estimators</h1>
+<p>The general framework in <a href="#sec-estimation-inference" class="quarto-xref">Section&nbsp;2</a> requires only consistent and asymptotically normal estimators with consistently estimable asymptotic variance-covariance matrices.</p>
+<section id="sec-unadjusted-analysis" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-unadjusted-analysis"><span class="header-section-number">3.1</span> Group Sample Means</h2>
+<p>Sample-mean based estimators in combination with the multivariate model of <span class="citation" data-cites="konietschke2015parametric">Konietschke et al. (<a href="#ref-konietschke2015parametric" role="doc-biblioref">2015</a>)</span> and <span class="citation" data-cites="friedrich2017permuting">Friedrich et al. (<a href="#ref-friedrich2017permuting" role="doc-biblioref">2017</a>)</span> fulfill these criteria, as shown below. The model imposes minimal restrictions on the data generating process: it assumes neither multivariate normality nor homogeneous covariance matrices, allows for different sample sizes, and permits the distributions of the error vectors to differ across groups. Consider an experiment with <span class="math inline">\(G\)</span> treatment groups and a numeric outcome vector <span class="math inline">\(Y_{ig} = (Y_{ig1}, ..., Y_{igM})'\)</span> observed for unit <span class="math inline">\(i\)</span> assigned to group <span class="math inline">\(g\)</span>. Throughout, <span class="math inline">\(I_M\)</span> denotes the <span class="math inline">\(M \times M\)</span> identity matrix, <span class="math inline">\(\mathbb{1}_M\)</span> and <span class="math inline">\(\mathbb{0}_M\)</span> the <span class="math inline">\(M\)</span>-dimensional column vectors of ones and zeros, and <span class="math inline">\(\mathbb{1}\{\cdot\}\)</span> the indicator function. The assumptions are as follows:</p>
+<p><span id="eq-model-decomposition"><span class="math display">\[
+Y_{ig}=\mu_g+\varepsilon_{ig},\quad i=1, ..., N_g,\quad g=1, ..., G,\quad N = N_1 + \cdots + N_G,
+\tag{14}\]</span></span></p>
+<p><span id="eq-model-error"><span class="math display">\[
+\begin{aligned}
+E[\varepsilon_{ig}] &amp;= \mathbb{0}_M, \\
+\text{Var}[\varepsilon_{ig}] &amp;= \Sigma_{g} &gt; 0, \\
+E[\|\varepsilon_{ig}\|^4] &amp;&lt; \infty,
+\end{aligned}
+\tag{15}\]</span></span></p>
+<p><span id="eq-model-sample-size"><span class="math display">\[
+N_g/N \xrightarrow{N \to \infty} p_g \in (0,1),
+\tag{16}\]</span></span></p>
+<p>where the error vectors are independent across all units and identically distributed within each group. This is a nonparametric model: no distributional assumptions are imposed on the errors, which are only required to have finite variance-covariance matrices and finite fourth moments. No special structure of the covariance matrix <span class="math inline">\(\Sigma_g\)</span> is assumed and the <span class="math inline">\(\Sigma_g\)</span> may differ between groups; the number of coordinates may in general also differ between groups by design <span class="citation" data-cites="friedrich2017permuting">(<a href="#ref-friedrich2017permuting" role="doc-biblioref">Friedrich et al. 2017</a>)</span>, but we take a common, fixed number <span class="math inline">\(M\)</span> throughout. The individual vectors are aggregated into <span class="math display">\[
+\begin{aligned}
+\mathbf{Y} &amp;= (Y_{11}', ..., Y_{N_GG}')', \\
+\mu &amp;= (\mu_1', ..., \mu_G')', \\
+\mu_g &amp;= (\mu_{g1}, ..., \mu_{gM})',
+\end{aligned}
+\]</span> and this general design allows for factorial structures within the components of <span class="math inline">\(\mu\)</span> by splitting up the indices.</p>
+<p>In this section the elemental parameter of <a href="#sec-general-framework" class="quarto-xref">Section&nbsp;2.1</a> is the stacked mean vector, <span class="math inline">\(\theta = \mu\)</span> — so that <span class="math inline">\(P = GM\)</span> — estimated by the group sample means. Denote the group sample mean vector and sample variance-covariance matrix as <span class="math display">\[
+\bar{\mu}_g:=\frac{1}{N_g}\sum_{i=1}^{N_g} Y_{ig},\;\;\hat{\Sigma}_g:=\frac{1}{N_g-1}\sum_{i=1}^{N_g}(Y_{ig}-\bar{\mu}_g)(Y_{ig}-\bar{\mu}_g)'.
+\]</span> The estimator of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\bar{\mu}=(\bar{\mu}_1', ..., \bar{\mu}_G')'\)</span>. The exact covariance matrix of the normalized vector of group means and its empirical estimator are the block-diagonal matrices <span id="eq-vcov-estimator"><span class="math display">\[
+\begin{aligned}
+\Sigma_{\sqrt{N}\bar{\mu}} &amp;= \text{Var}[\sqrt{N}\bar{\mu}] = \operatorname{diag}\!\left\{\frac{N}{N_g}\Sigma_g : 1 \leq g \leq G\right\}, \\[4pt]
+\hat{\Sigma}_{\sqrt{N}\bar{\mu}} &amp;= \operatorname{diag}\!\left\{\frac{N}{N_g}\hat{\Sigma}_g : 1 \leq g \leq G\right\};
+\end{aligned}
+\tag{17}\]</span></span> equivalently, <span class="math inline">\(\text{Var}[\bar{\mu}]\)</span> is estimated by <span class="math display">\[
+\hat{\Sigma}_{\bar{\mu}} := \hat{\Sigma}_{\sqrt{N}\bar{\mu}}/N = \operatorname{diag}\{\hat{\Sigma}_g/N_g : 1 \leq g \leq G\},
+\]</span> which plays the role of the estimator <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span> of <a href="#sec-general-framework" class="quarto-xref">Section&nbsp;2.1</a>.</p>
+<p>By the multivariate central limit theorem <span class="citation" data-cites="konietschke2015parametric">(<a href="#ref-konietschke2015parametric" role="doc-biblioref">Konietschke et al. 2015</a>, Thm. 2.1)</span>, <span class="math inline">\(\bar{\mu}\)</span> is asymptotically normal, <span id="eq-clt"><span class="math display">\[
+\sqrt{N}(\bar{\mu}-\mu) \xrightarrow{D} N(0, \Sigma_{\sqrt{N}\bar{\mu}}^\infty), \qquad \Sigma_{\sqrt{N}\bar{\mu}}^\infty := \operatorname{diag}\{\Sigma_1/p_1, \ldots, \Sigma_G/p_G\},
+\tag{18}\]</span></span> and the estimator <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> is consistent, <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\bar{\mu}} \to \Sigma_{\sqrt{N}\bar{\mu}}^\infty\)</span> almost surely , <a href="#eq-model-sample-size" class="quarto-xref">with&nbsp;16</a>. Group sample means thus satisfy <a href="#eq-asymptotically-normal-estimator" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-consistent-var-cov-estimator" class="quarto-xref">Equation&nbsp;2</a>.</p>
+<p>The following examples instantiate <a href="#eq-model-decomposition" class="quarto-xref">Equation&nbsp;14</a> and <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> for four canonical designs covered by the model.</p>
+<p><strong>Example 1 (Univariate cross-sectional).</strong> <em>Each unit is measured on a single metric at a single occasion.</em></p>
+<p>This case, the workhorse of single-metric experiments, has <span class="math inline">\(M = 1\)</span>: the observation vector is the scalar <span class="math inline">\(Y_{ig}\)</span>, the mean vector is the scalar <span class="math inline">\(\mu_g = E[Y_{ig}]\)</span>, so that <span class="math inline">\(\theta = \mu = (\mu_1, \ldots, \mu_G)'\)</span>, and the covariance matrix in <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> reduces to the variance <span class="math inline">\(\sigma^2_g := \text{Var}[Y_{ig}]\)</span>. The group sample mean estimator becomes <span class="math display">\[
+\bar{\mu}_g = \frac{1}{N_g}\sum_{i=1}^{N_g} Y_{ig},
+\]</span> and the estimator of its sampling variance <span class="math inline">\(\sigma_g^2/N_g\)</span> becomes <span class="math inline">\(\hat{\sigma}_g^2/N_g\)</span> with <span class="math display">\[
+\hat{\sigma}^2_g := \frac{1}{N_g-1}\sum_{i=1}^{N_g}(Y_{ig}-\bar{\mu}_g)^2.
+\]</span> The matrices <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> become diagonal, <span class="math display">\[
+\Sigma_{\sqrt{N}\bar{\mu}}=\begin{pmatrix}
+\frac{N}{N_1}\sigma^2_1 &amp; 0 &amp; \cdots &amp; 0\\
+0 &amp; \frac{N}{N_2}\sigma^2_2 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; \cdots &amp; \frac{N}{N_G}\sigma^2_G
+\end{pmatrix},
+\]</span> of dimension <span class="math inline">\(G \times G\)</span>, and <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\bar{\mu}}\)</span> has the same form with <span class="math inline">\(\hat{\sigma}_g^2\)</span> in place of <span class="math inline">\(\sigma_g^2\)</span>. This recovers the univariate model of <span class="citation" data-cites="pauly2015asymptotic">Pauly et al. (<a href="#ref-pauly2015asymptotic" role="doc-biblioref">2015</a>)</span>.</p>
+<p>Estimation requires only the group summaries <span class="math inline">\(\bar{\mu}_g\)</span>, <span class="math inline">\(N_g\)</span> and <span class="math inline">\(\hat{\sigma}_g^2\)</span>. Equivalently, stack observations by group and then by unit, and let <span class="math inline">\(\mathbf{D}\)</span> be the <span class="math inline">\(N \times G\)</span> matrix of group indicators, with entry <span class="math inline">\(D_{(ig),g'}=\mathbb{1}\{g=g'\}\)</span>. The linear working model has no separate intercept: <span class="math display">\[
+\begin{aligned}
+\mathbf{Y} &amp;= \mathbf{D}\mu+\boldsymbol{\varepsilon}, \\
+\Omega := \text{Var}[\boldsymbol{\varepsilon}]
+&amp;= \operatorname{diag}\{\sigma_g^2 I_{N_g}:1\leq g\leq G\}.
+\end{aligned}
+\]</span> Its OLS coefficient vector equals <span class="math inline">\(\bar{\mu}\)</span> <span class="citation" data-cites="rencher2008linear">(<a href="#ref-rencher2008linear" role="doc-biblioref">Rencher and Schaalje 2008</a>, Ch. 13)</span>, and for <span class="math inline">\(N_g &gt; 1\)</span> the HC2 version of the Eicker–Huber–White sandwich covariance, built from the residuals <span class="math inline">\(\hat{\varepsilon}_{ig} := Y_{ig} - \bar{\mu}_g\)</span> as <span class="math display">\[
+\hat{\Omega}_{\mathrm{HC2}} := \operatorname{diag}\{\hat{\Omega}_1, \ldots, \hat{\Omega}_G\},
+\qquad
+\hat{\Omega}_g := \frac{N_g}{N_g-1}\operatorname{diag}\{\hat{\varepsilon}_{1g}^2, \ldots, \hat{\varepsilon}_{N_g g}^2\},
+\]</span> reproduces <span class="math inline">\(\hat{\Sigma}_{\bar{\mu}}\)</span> exactly: <span id="eq-cross-sectional-hc2"><span class="math display">\[
+\begin{aligned}
+\hat{\Sigma}_{\bar{\mu}}^{\mathrm{HC2}}
+&amp;:= (\mathbf{D}'\mathbf{D})^{-1}\mathbf{D}'\hat{\Omega}_{\mathrm{HC2}}\mathbf{D}(\mathbf{D}'\mathbf{D})^{-1} \\
+&amp;= \operatorname{diag}\{N_g^{-1}\}\,\operatorname{diag}\{N_g\hat{\sigma}_g^2\}\,\operatorname{diag}\{N_g^{-1}\} \\
+&amp;= \operatorname{diag}\{\hat{\sigma}_g^2/N_g : 1 \leq g \leq G\} = \hat{\Sigma}_{\bar{\mu}},
+\end{aligned}
+\tag{19}\]</span></span> because <span class="math inline">\(\mathbf{D}'\mathbf{D} = \operatorname{diag}\{N_g\}\)</span> and <span class="math inline">\(\mathbf{D}'\hat{\Omega}_{\mathrm{HC2}}\mathbf{D} = \operatorname{diag}\{\tfrac{N_g}{N_g-1}\sum_{i=1}^{N_g}\hat{\varepsilon}_{ig}^2\} = \operatorname{diag}\{N_g\hat{\sigma}_g^2\}\)</span>. Multiplication by <span class="math inline">\(N\)</span> gives <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\bar{\mu}}\)</span> in <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a>.</p>
+<p><strong>Example 2 (Univariate panel).</strong> <em>Each unit is measured on a single metric at each of several fixed occasions, with treatment assigned once at the unit level and held fixed across occasions.</em></p>
+<p>Extend Example 1 by observing the same metric at <span class="math inline">\(T\)</span> fixed occasions. Let <span class="math inline">\(Y_{igt}\)</span> denote the value of the metric recorded on unit <span class="math inline">\(i\)</span> of group <span class="math inline">\(g\)</span> at occasion <span class="math inline">\(t = 1, \ldots, T\)</span>. The observation vector collects the unit’s time course, <span class="math display">\[
+Y_{ig} = (Y_{ig1}, ..., Y_{igT})',
+\]</span> so that <a href="#eq-model-decomposition" class="quarto-xref">Equation&nbsp;14</a> holds with <span class="math inline">\(M = T\)</span> and, componentwise, <span class="math display">\[
+Y_{igt}=\mu_{gt}+\varepsilon_{igt}, \qquad \mu_{gt} = E[Y_{igt}],
+\]</span> which centers each observation at its group–time mean. Writing <span class="math inline">\(\sigma_{g,tt'} := \text{Cov}[Y_{igt}, Y_{igt'}]\)</span>, the covariance matrix in <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> is <span class="math display">\[
+\Sigma_g =\begin{pmatrix}
+\sigma_{g,11} &amp; \sigma_{g,12} &amp; \cdots &amp; \sigma_{g,1T}\\
+\sigma_{g,12} &amp; \sigma_{g,22} &amp; \cdots &amp; \sigma_{g,2T}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\sigma_{g,1T} &amp; \sigma_{g,2T} &amp; \cdots &amp; \sigma_{g,TT}
+\end{pmatrix},
+\]</span> carrying the variances of the metric at each occasion on its diagonal and its serial covariances off it.</p>
+<p>The assumptions in <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> concern the joint error vector across occasions; neither smoothness of the mean trajectory nor stationarity of the outcome process is required. The fixed population means <span class="math inline">\(\mu_{gt}\)</span> may therefore exhibit trends, seasonality, or abrupt level changes. With <span class="math inline">\(T\)</span> fixed, each group–time mean is consistently estimated by averaging across independent units regardless of the shape of the mean trajectory. The covariance estimator likewise centers each occasion by its own sample mean, so changes in the population mean across occasions do not enter the estimated error covariance.</p>
+<p>Temporal dependence within a unit is retained in <span class="math inline">\(\Sigma_g\)</span>. Processes with random intercepts or slopes, serially correlated errors, or unit-specific random walks are covered whenever their error vectors are identically distributed within groups, independent across units, and satisfy the stated moment and positive-definiteness conditions. Common stochastic shocks that induce dependence between units fall outside this formulation.</p>
+<p>The group sample mean estimator becomes the vector of occasion means, <span class="math display">\[
+\bar{\mu}_g = (\bar{\mu}_{g1}, \ldots, \bar{\mu}_{gT})', \qquad \bar{\mu}_{gt} = \frac{1}{N_g}\sum_{i=1}^{N_g} Y_{igt},
+\]</span> and the estimator of its sampling variance <span class="math inline">\(\Sigma_g/N_g\)</span> becomes <span class="math inline">\(\hat{\Sigma}_g/N_g\)</span> with entries <span class="math display">\[
+\hat{\sigma}_{g,tt'} := \frac{1}{N_g-1}\sum_{i=1}^{N_g}(Y_{igt}-\bar{\mu}_{gt})(Y_{igt'}-\bar{\mu}_{gt'}).
+\]</span> The matrices <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> are block-diagonal with <span class="math inline">\(G\)</span> blocks of size <span class="math inline">\(T \times T\)</span>, giving total dimension <span class="math inline">\(GT \times GT\)</span>. This is the repeated measures setting of <span class="citation" data-cites="friedrich2017permuting">Friedrich et al. (<a href="#ref-friedrich2017permuting" role="doc-biblioref">2017</a>)</span>.</p>
+<p><strong>Example 3 (Multivariate cross-sectional).</strong> <em>Each unit is measured on several metrics at a single occasion.</em></p>
+<p>Extend Example 1 by recording <span class="math inline">\(V\)</span> metrics at a single occasion. Let <span class="math inline">\(Y_{igv}\)</span> denote the value of metric <span class="math inline">\(v = 1, \ldots, V\)</span> recorded on unit <span class="math inline">\(i\)</span> of group <span class="math inline">\(g\)</span>. The observation vector collects the unit’s metrics, <span class="math display">\[
+Y_{ig} = (Y_{ig1}, ..., Y_{igV})',
+\]</span> so that <a href="#eq-model-decomposition" class="quarto-xref">Equation&nbsp;14</a> holds with <span class="math inline">\(M = V\)</span> and <span class="math inline">\(\mu_{gv} = E[Y_{igv}]\)</span>. Writing <span class="math inline">\(\sigma_{g,vv'} := \text{Cov}[Y_{igv}, Y_{igv'}]\)</span>, the covariance matrix in <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> is <span class="math display">\[
+\Sigma_g =\begin{pmatrix}
+\sigma_{g,11} &amp; \sigma_{g,12} &amp; \cdots &amp; \sigma_{g,1V}\\
+\sigma_{g,12} &amp; \sigma_{g,22} &amp; \cdots &amp; \sigma_{g,2V}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\sigma_{g,1V} &amp; \sigma_{g,2V} &amp; \cdots &amp; \sigma_{g,VV}
+\end{pmatrix},
+\]</span> carrying the variances of the metrics on its diagonal and the covariances between metrics on the same unit, contemporaneous by construction, off it. The group sample mean estimator becomes the vector of metric means, <span class="math display">\[
+\bar{\mu}_g = (\bar{\mu}_{g1}, \ldots, \bar{\mu}_{gV})', \qquad \bar{\mu}_{gv} = \frac{1}{N_g}\sum_{i=1}^{N_g} Y_{igv},
+\]</span> and the estimator of its sampling variance <span class="math inline">\(\Sigma_g/N_g\)</span> becomes <span class="math inline">\(\hat{\Sigma}_g/N_g\)</span> with entries <span class="math display">\[
+\hat{\sigma}_{g,vv'} := \frac{1}{N_g-1}\sum_{i=1}^{N_g}(Y_{igv}-\bar{\mu}_{gv})(Y_{igv'}-\bar{\mu}_{gv'}).
+\]</span> The matrices <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> are block-diagonal with <span class="math inline">\(G\)</span> blocks of size <span class="math inline">\(V \times V\)</span>, giving total dimension <span class="math inline">\(GV \times GV\)</span>. This is the general MANOVA setting of <span class="citation" data-cites="konietschke2015parametric">Konietschke et al. (<a href="#ref-konietschke2015parametric" role="doc-biblioref">2015</a>)</span>.</p>
+<p><strong>Example 4 (Multivariate panel).</strong> <em>Each unit is measured on several metrics at each of several fixed occasions, with treatment assigned once at the unit level and held fixed across occasions.</em></p>
+<p>Combining the repeated measurements of Example 2 with the multiple metrics of Example 3, let <span class="math inline">\(Y_{igvt}\)</span> denote the value of metric <span class="math inline">\(v = 1, \ldots, V\)</span> recorded on unit <span class="math inline">\(i\)</span> of group <span class="math inline">\(g\)</span> at occasion <span class="math inline">\(t = 1, \ldots, T\)</span>. Collect first the time course of a single metric <span class="math inline">\(v\)</span> on unit <span class="math inline">\(i\)</span> in the <span class="math inline">\(T \times 1\)</span> vector <span class="math display">\[
+Y^{(v)}_{ig} = (Y_{igv1}, ..., Y_{igvT})',
+\]</span> and then stack the <span class="math inline">\(V\)</span> metric vectors into the unit’s full observation vector, <span class="math display">\[
+Y_{ig} = (Y^{(1)\prime}_{ig}, ..., Y^{(V)\prime}_{ig})',
+\]</span> so that <a href="#eq-model-decomposition" class="quarto-xref">Equation&nbsp;14</a> holds with <span class="math inline">\(M = VT\)</span> and <span class="math inline">\(\mu_{gvt} = E[Y_{igvt}]\)</span>.</p>
+<p>The covariance matrix in <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> is built up along the same two steps. Writing <span class="math inline">\(\sigma^{(vv')}_{g,tt'} := \text{Cov}[Y_{igvt}, Y_{igv't'}]\)</span>, the covariance matrix of a single metric vector is the <span class="math inline">\(T \times T\)</span> matrix <span class="math display">\[
+\Sigma^{(vv)}_g := \text{Var}[Y^{(v)}_{ig}] =\begin{pmatrix}
+\sigma^{(vv)}_{g,11} &amp; \sigma^{(vv)}_{g,12} &amp; \cdots &amp; \sigma^{(vv)}_{g,1T}\\
+\sigma^{(vv)}_{g,12} &amp; \sigma^{(vv)}_{g,22} &amp; \cdots &amp; \sigma^{(vv)}_{g,2T}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\sigma^{(vv)}_{g,1T} &amp; \sigma^{(vv)}_{g,2T} &amp; \cdots &amp; \sigma^{(vv)}_{g,TT}
+\end{pmatrix},
+\]</span> carrying the variances of metric <span class="math inline">\(v\)</span> at each occasion on its diagonal and the serial covariances of that metric off it. Two different metric vectors of the same unit covary as well, through the <span class="math inline">\(T \times T\)</span> matrix <span class="math inline">\(\Sigma^{(vv')}_g := \text{Cov}[Y^{(v)}_{ig}, Y^{(v')}_{ig}]\)</span>, whose diagonal holds the contemporaneous covariances between metrics <span class="math inline">\(v\)</span> and <span class="math inline">\(v'\)</span> and whose off-diagonal entries the lagged ones. Since <span class="math inline">\(Y_{ig}\)</span> stacks the metric vectors, its covariance matrix assembles these blocks in the same order, <span class="math display">\[
+\Sigma_g = \text{Var}[Y_{ig}] =
+\begin{pmatrix}
+\Sigma_g^{(11)} &amp; \Sigma_g^{(12)} &amp; \cdots &amp; \Sigma_g^{(1V)} \\
+\Sigma_g^{(12)\prime} &amp; \Sigma_g^{(22)} &amp; \cdots &amp; \Sigma_g^{(2V)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\Sigma_g^{(1V)\prime} &amp; \Sigma_g^{(2V)\prime} &amp; \cdots &amp; \Sigma_g^{(VV)}
+\end{pmatrix},
+\]</span> of dimension <span class="math inline">\(VT \times VT\)</span>, which <a href="#eq-model-error" class="quarto-xref">Equation&nbsp;15</a> restricts only by requiring positive definiteness; in particular no separability between the metric and the occasion margin is assumed.</p>
+<p>The group sample mean estimator stacks the cell means in the order of <span class="math inline">\(Y_{ig}\)</span>, <span class="math display">\[
+\bar{\mu}_g = (\bar{\mu}^{(1)\prime}_g, \ldots, \bar{\mu}^{(V)\prime}_g)', \qquad \bar{\mu}^{(v)}_g = (\bar{\mu}_{gv1}, \ldots, \bar{\mu}_{gvT})', \qquad \bar{\mu}_{gvt} = \frac{1}{N_g}\sum_{i=1}^{N_g} Y_{igvt},
+\]</span> and the estimator of its sampling variance <span class="math inline">\(\Sigma_g/N_g\)</span> becomes <span class="math inline">\(\hat{\Sigma}_g/N_g\)</span> with entries <span class="math display">\[
+\hat{\sigma}^{(vv')}_{g,tt'} := \frac{1}{N_g-1}\sum_{i=1}^{N_g}(Y_{igvt}-\bar{\mu}_{gvt})(Y_{igv't'}-\bar{\mu}_{gv't'}).
+\]</span> Collecting the groups, the matrix <a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a> is of dimension <span class="math inline">\(GVT \times GVT\)</span> and equals <span class="math display">\[
+\Sigma_{\sqrt{N}\bar{\mu}}=\begin{pmatrix}
+\frac{N}{N_1}\Sigma_1 &amp; 0 &amp; \cdots &amp; 0\\
+0 &amp; \frac{N}{N_2}\Sigma_2 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; \cdots &amp; \frac{N}{N_G}\Sigma_G
+\end{pmatrix},
+\]</span> the off-diagonal blocks vanishing because units in different groups are independent, and <span class="math inline">\(\hat{\Sigma}_{\sqrt{N}\bar{\mu}}\)</span> has the same form with <span class="math inline">\(\hat{\Sigma}_g\)</span> in place of <span class="math inline">\(\Sigma_g\)</span>.</p>
+</section>
+</section>
+<section id="sec-applications" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Applications</h1>
+<p>We now apply the general framework to several common tasks arising in multigroup randomized experiments: comparing two conditions, identifying optimal conditions, comparing multiple conditions against a baseline, testing equality of multiple conditions, and analyzing factorial designs. The key task in each case is to set up the parameter vector <span class="math inline">\(\theta\)</span> and the contrast matrix <span class="math inline">\(H\)</span>. Everything else is supplied by the framework: a joint null <span class="math inline">\(H\theta = 0\)</span> is tested with the WTS <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> whenever <span class="math inline">\(\Sigma_{\hat{\vartheta}}\)</span> is positive definite; row-wise decisions and simultaneous confidence intervals use the max-<span class="math inline">\(t\)</span> procedure of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>; and a single row is analyzed as in <a href="#sec-contrasts" class="quarto-xref">Section&nbsp;2.4</a> including power and sample size planning.</p>
+<section id="sec-pairwise-contrasts" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-pairwise-contrasts"><span class="header-section-number">4.1</span> Contrasts</h2>
+<p>In the design of Example 1, <span class="math inline">\(\theta = \mu = (\mu_1, \ldots, \mu_G)'\)</span> is estimated by the group sample means <span class="math inline">\(\bar{\mu} = (\bar{\mu}_1, \ldots, \bar{\mu}_G)'\)</span> with the diagonal covariance estimator <span class="math inline">\(\hat{\Sigma}_{\bar{\mu}} = \operatorname{diag}\{\hat{\sigma}_g^2/N_g\}\)</span> of <a href="#sec-unadjusted-analysis" class="quarto-xref">Section&nbsp;3.1</a>. For a contrast <span class="math inline">\(c = (c_1, \ldots, c_G)\)</span> with <span class="math inline">\(\sum_{g} c_g = 0\)</span>, the covariance terms of <a href="#eq-contrast-variance" class="quarto-xref">Equation&nbsp;8</a> and <a href="#eq-contrast-variance-estimator" class="quarto-xref">Equation&nbsp;9</a> vanish, since units in different groups are independent, and the contrast, its estimator, the variance and the variance estimator become <span id="eq-contrast-sdm"><span class="math display">\[
+\begin{aligned}
+C &amp;= c\mu = \sum_{g=1}^G c_g \mu_g, \qquad \hat{C} = c\bar{\mu} = \sum_{g=1}^G c_g \bar{\mu}_g, \\[4pt]
+\text{Var}[\hat{C}] &amp;= \sum_{g=1}^G \frac{c_g^2 \sigma_g^2}{N_g}, \qquad \widehat{\text{Var}}[\hat{C}] = \sum_{g=1}^G \frac{c_g^2 \hat{\sigma}_g^2}{N_g}.
+\end{aligned}
+\tag{20}\]</span></span> The variance is exact (<a href="#eq-vcov-estimator" class="quarto-xref">Equation&nbsp;17</a>), so only the normality of <span class="math inline">\(\hat{C}\)</span> and the consistency of the <span class="math inline">\(\hat{\sigma}_g^2\)</span> rest on large-sample arguments. With this standard error the tests and confidence sets of <a href="#sec-contrast-inference" class="quarto-xref">Section&nbsp;2.4.2</a> apply by substitution, and the global test of <a href="#sec-power" class="quarto-xref">Section&nbsp;2.3</a> reduces to the squared statistic, since for <span class="math inline">\(W = 1\)</span> the matrix <span class="math inline">\(\hat{\Sigma}_{\hat{\vartheta}}\)</span> in <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> is the scalar <span class="math inline">\(\widehat{\text{Var}}[\hat{C}]\)</span>, <span class="math display">\[
+\begin{aligned}
+WTS &amp;= (\hat{C} - C_0)\,\widehat{\text{Var}}[\hat{C}]^{-1}(\hat{C} - C_0) \\[4pt]
+&amp;= \frac{(\hat{C} - C_0)^2}{\sum_{g=1}^G c_g^2 \hat{\sigma}_g^2 / N_g} \\[4pt]
+&amp;= Z^2 \xrightarrow[N \to \infty]{D} \chi^2_1,
+\end{aligned}
+\]</span> which rejects exactly when <span class="math inline">\(|Z| &gt; z_{1-\alpha/2}\)</span> because <span class="math inline">\(\chi^2_{1,1-\alpha} = z_{1-\alpha/2}^2\)</span>.</p>
+<p>The pairwise comparison of groups <span class="math inline">\(g\)</span> and <span class="math inline">\(g'\)</span> is the contrast with <span class="math inline">\(c_g = 1\)</span>, <span class="math inline">\(c_{g'} = -1\)</span> and all other weights zero, the average treatment effect <span class="math inline">\(C = \mu_g - \mu_{g'} = \text{ATE}(g, g')\)</span> of <a href="#sec-causal-inference" class="quarto-xref">Section&nbsp;2.4.1</a>, for which <a href="#eq-contrast-sdm" class="quarto-xref">Equation&nbsp;20</a> reduces to <span id="eq-two-sample-z"><span class="math display">\[
+\begin{aligned}
+\hat{C} &amp;= \bar{\mu}_g - \bar{\mu}_{g'}, \qquad \widehat{\text{Var}}[\hat{C}] = \frac{\hat{\sigma}_g^2}{N_g} + \frac{\hat{\sigma}_{g'}^2}{N_{g'}}, \\[4pt]
+Z &amp;= \frac{\bar{\mu}_g - \bar{\mu}_{g'} - C_0}{\sqrt{\hat{\sigma}_g^2/N_g + \hat{\sigma}_{g'}^2/N_{g'}}}.
+\end{aligned}
+\tag{21}\]</span></span> This is the statistic of Welch’s test for two means with unequal variances <span class="citation" data-cites="welch1938significance welch1947generalization jan2014sample">(<a href="#ref-welch1938significance" role="doc-biblioref">Welch 1938</a>, <a href="#ref-welch1947generalization" role="doc-biblioref">1947</a>; <a href="#ref-jan2014sample" role="doc-biblioref">Jan and Shieh 2014</a>)</span>; the two-group experiment is the special case <span class="math inline">\(G = 2\)</span>.</p>
+<p>The planning input of <a href="#sec-power-analysis-contrasts" class="quarto-xref">Section&nbsp;2.4.3</a> becomes explicit as well, <span class="math inline">\(\bar{V}_C = \sum_{g=1}^{G} c_g^2 \sigma_g^2 / p_g\)</span>, so that the sample size formula <a href="#eq-power-sample-size" class="quarto-xref">Equation&nbsp;13</a> becomes <span class="math display">\[
+N \ge (z_{1-\alpha/2} + z_{1-\beta})^2 \delta^{-2} \sum_{g=1}^G c_g^2 \sigma_g^2 / p_g
+\]</span> with <span class="math inline">\(N_g = p_g N\)</span>, and the noncentrality of <a href="#eq-wts-alternative" class="quarto-xref">Equation&nbsp;6</a> is <span class="math inline">\(\lambda_N = N\delta^2/\bar{V}_C = \lambda^2\)</span>. For a pairwise comparison these are the classical two-sample formulas (<a href="#eq-two-sample-z" class="quarto-xref">Equation&nbsp;21</a>).</p>
+<p>The explicit form additionally allows optimizing the allocation. Minimizing <span class="math inline">\(\bar{V}_C\)</span> over <span class="math inline">\((p_1, \ldots, p_G)\)</span> subject to <span class="math inline">\(\sum_{g=1}^G p_g = 1\)</span> yields the generalized <em>Neyman allocation</em> <span class="citation" data-cites="neyman1934two cochran1977sampling">(<a href="#ref-neyman1934two" role="doc-biblioref">Neyman 1934</a>; <a href="#ref-cochran1977sampling" role="doc-biblioref">Cochran 1977</a>)</span></p>
+<p><span class="math display">\[
+p_g^* = \frac{|c_g| \sigma_g}{\sum_{k=1}^{G} |c_k| \sigma_k},
+\qquad
+\bar{V}_C^* = \Big( \sum_{g=1}^{G} |c_g| \sigma_g \Big)^2,
+\]</span></p>
+<p>which is simultaneously optimal for power, minimum detectable effect and expected interval length, since all are monotone in <span class="math inline">\(\bar{V}_C\)</span> <span class="citation" data-cites="list2011so">(<a href="#ref-list2011so" role="doc-biblioref">List et al. 2011</a>)</span>.</p>
+</section>
+<section id="sec-optimal-conditions" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-optimal-conditions"><span class="header-section-number">4.2</span> All-Pairwise Comparisons</h2>
+<p>When the goal is to identify the group with the largest parameter value <span class="math inline">\(\theta_g\)</span>, the natural family consists of <em>all pairwise comparisons</em>: <span class="math inline">\(W = G(G - 1)/2\)</span> contrasts, each defined by a weight vector <span class="math inline">\(c^{(w)}\)</span> with a single <span class="math inline">\(+1\)</span>, a single <span class="math inline">\(-1\)</span>, and zeros elsewhere <span class="citation" data-cites="herberich2010robust">(<a href="#ref-herberich2010robust" role="doc-biblioref">Herberich et al. 2010</a>)</span>. The resulting <span class="math inline">\(W \times G\)</span> contrast matrix is</p>
+<p><span class="math display">\[
+H_{\mathrm{pair}} =
+\begin{bmatrix}
+-1 &amp; 1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+-1 &amp; 0 &amp; 1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots &amp; \vdots \\
+-1 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; 1 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; -1 &amp; 1 \\
+\end{bmatrix}.
+\]</span></p>
+<p>The family is analyzed row-wise with the max-<span class="math inline">\(t\)</span> procedure of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>.</p>
+</section>
+<section id="sec-many-to-one" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-many-to-one"><span class="header-section-number">4.3</span> Many-to-One Comparisons</h2>
+<p>Comparing a single baseline condition against all others is referred to as a <em>many-to-one comparison</em> <span class="citation" data-cites="bretz2016multiple">(<a href="#ref-bretz2016multiple" role="doc-biblioref">Bretz et al. 2010</a>)</span>. The corresponding <span class="math inline">\((G - 1) \times G\)</span> contrast matrix is</p>
+<p><span class="math display">\[
+H =
+\begin{bmatrix}
+1 &amp; -1 &amp; 0 &amp; 0 &amp; \dots &amp; 0 \\
+1 &amp; 0 &amp; -1 &amp; 0 &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; &amp; \vdots \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; \dots &amp; -1 \\
+\end{bmatrix}.
+\]</span></p>
+<p>All rows involve the baseline group, so the contrast estimators are correlated even when <span class="math inline">\(\hat{\Sigma}_{\hat{\theta}}\)</span> is diagonal, and the max-<span class="math inline">\(t\)</span> procedure of <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a> calibrates the family with this correlation.</p>
+</section>
+<section id="sec-testing-equality" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-testing-equality"><span class="header-section-number">4.4</span> Tests of Equality Across Groups</h2>
+<p>A fundamental use case is testing the global null hypothesis that all group parameters are equal, <span class="math display">\[
+H_0: \theta_1 = \theta_2 = \cdots = \theta_G,
+\]</span> or, more generally, equality across a subset of <span class="math inline">\(R &lt; G\)</span> parameters. The null is tested with the WTS <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> using a full-row-rank matrix of successive differences; for all <span class="math inline">\(G\)</span> parameters this is the <span class="math inline">\((G - 1) \times G\)</span> matrix</p>
+<p><span class="math display">\[
+H_{\mathrm{eq}} =
+\begin{bmatrix}
+1 &amp; -1 &amp; 0 &amp; \dots &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; -1 &amp; \dots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \dots &amp; 1 &amp; -1 \\
+\end{bmatrix},
+\]</span></p>
+<p>with <span class="math inline">\(W = G - 1\)</span> degrees of freedom (<span class="math inline">\(R - 1\)</span> for a subset). For group sample means in the design of Example 1, <span class="math inline">\(\hat{\Sigma}_{\bar{\mu}}\)</span> is diagonal and the WTS <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> has the closed form <span id="eq-wts-equality"><span class="math display">\[
+WTS = \sum_{g=1}^G \frac{N_g}{\hat{\sigma}_g^2}\,(\bar{\mu}_g - \tilde{\mu})^2,
+\qquad
+\tilde{\mu} := \frac{\sum_{g=1}^G (N_g/\hat{\sigma}_g^2)\,\bar{\mu}_g}{\sum_{g=1}^G N_g/\hat{\sigma}_g^2},
+\tag{22}\]</span></span> the precision-weighted sum of squared deviations of the group means from their precision-weighted average. It does not depend on the choice of the difference matrix, since replacing <span class="math inline">\(H\)</span> by <span class="math inline">\(AH\)</span> with <span class="math inline">\(A\)</span> invertible leaves <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> unchanged, and is the large-sample form of the Welch–James statistic for the heteroscedastic one-way layout <span class="citation" data-cites="james1951comparison welch1951comparison algina1984implementing">(<a href="#ref-james1951comparison" role="doc-biblioref">James 1951</a>; <a href="#ref-welch1951comparison" role="doc-biblioref">Welch 1951</a>; <a href="#ref-algina1984implementing" role="doc-biblioref">Algina and Olejnik 1984</a>)</span>.</p>
+<p>Under local alternatives the WTS is noncentral <span class="math inline">\(\chi^2_{G-1}(\lambda_N)\)</span> (<a href="#eq-wts-alternative" class="quarto-xref">Equation&nbsp;6</a>), with the noncentrality of the same form in population quantities, <span id="eq-ncp-sdm"><span class="math display">\[
+\lambda_N = \sum_{g=1}^G \frac{N_g}{\sigma_g^2}\,(\mu_g - \tilde{\mu})^2,
+\tag{23}\]</span></span> where <span class="math inline">\(\tilde{\mu}\)</span> now averages the <span class="math inline">\(\mu_g\)</span> with weights <span class="math inline">\(N_g/\sigma_g^2\)</span>; power and sample size follow from <a href="#eq-power" class="quarto-xref">Equation&nbsp;7</a>. Under balanced allocation and homoscedasticity, <span class="math inline">\(N_g = N/G\)</span> and <span class="math inline">\(\sigma_g = \sigma\)</span>, this is <span class="math inline">\(\lambda_N = N f^2\)</span> with Cohen’s <span class="math inline">\(f^2 = \sum_{g}(\mu_g - \mu_\cdot)^2/(G\sigma^2)\)</span> and <span class="math inline">\(\mu_\cdot := G^{-1}\sum_{g}\mu_g\)</span>, the noncentrality of classical ANOVA power analysis <span class="citation" data-cites="cohen1988statistical">(<a href="#ref-cohen1988statistical" role="doc-biblioref">Cohen 1988</a>)</span>.</p>
+<p>The classical one-way ANOVA <span class="math inline">\(F\)</span> test is the homoscedastic special case. Its statistic <span id="eq-anova-f"><span class="math display">\[
+F = \frac{\sum_{g=1}^G N_g(\bar{\mu}_g - \bar{\mu}_\cdot)^2 / (G - 1)}{\hat{\sigma}^2_{\mathrm{pool}}},
+\qquad
+\hat{\sigma}^2_{\mathrm{pool}} := \frac{1}{N - G}\sum_{g=1}^G (N_g - 1)\,\hat{\sigma}_g^2,
+\quad
+\bar{\mu}_\cdot := \frac{1}{N}\sum_{g=1}^G N_g \bar{\mu}_g,
+\tag{24}\]</span></span> satisfies <span class="math inline">\((G - 1)F = WTS\)</span> with <span class="math inline">\(\hat{\sigma}^2_{\mathrm{pool}}\)</span> in place of every <span class="math inline">\(\hat{\sigma}_g^2\)</span> in <a href="#eq-wts-equality" class="quarto-xref">Equation&nbsp;22</a>, since the weights are then proportional to <span class="math inline">\(N_g\)</span> and <span class="math inline">\(\tilde{\mu}\)</span> becomes the grand mean <span class="math inline">\(\bar{\mu}_\cdot\)</span>. Under <span class="math inline">\(H_0\)</span> and homoscedasticity <span class="math inline">\((G - 1)F \xrightarrow[N \to \infty]{D} \chi^2_{G-1}\)</span>, so the two tests are asymptotically equivalent.</p>
+</section>
+<section id="sec-factorial-designs" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-factorial-designs"><span class="header-section-number">4.5</span> Factorial Designs</h2>
+<p>Factorial designs study the effects of multiple experimental factors simultaneously. A <em>general factorial design</em> with <span class="math inline">\(K\)</span> factors <span class="math inline">\(f_1, \ldots, f_K\)</span>, each having <span class="math inline">\(L_{f_k}\)</span> levels, yields <span class="math inline">\(G = \prod_{k=1}^K L_{f_k}\)</span> treatment groups with mean vector <span class="math inline">\(\mu = (\mu_1, \ldots, \mu_G)'\)</span>, a <em><span class="math inline">\(2^K\)</span> design</em> when every factor has two levels; either all groups are run, or a fraction of them (<a href="#sec-fractional-factorial" class="quarto-xref">Section&nbsp;4.5.2</a>). The objective is to estimate and test <em>main effects</em> (the marginal effect of each factor) and <em>interaction effects</em> (the joint effect of two or more factors). For a nonempty subset <span class="math inline">\(\mathcal{S} \subseteq \{1, \ldots, K\}\)</span> of factors, the null hypothesis of no effect is <span class="math display">\[
+H_0(\mathcal{S}): H_{\mathcal{S}} \mu = 0,
+\]</span> where <span class="math inline">\(\mathcal{S} = \{k\}\)</span> gives the main effect of <span class="math inline">\(f_k\)</span> (written <span class="math inline">\(H_k\)</span>) and <span class="math inline">\(\mathcal{S} = \{j, k\}\)</span> the two-factor interaction of <span class="math inline">\(f_j\)</span> and <span class="math inline">\(f_k\)</span> (written <span class="math inline">\(H_{jk}\)</span>). Each <span class="math inline">\(H_{\mathcal{S}}\)</span> enters the WTS <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> for a joint test, single rows are analyzed as in <a href="#sec-contrasts" class="quarto-xref">Section&nbsp;2.4</a>, and several rows simultaneously as in <a href="#sec-simultaneous-inference" class="quarto-xref">Section&nbsp;2.2</a>, without assuming normality or homoscedasticity.</p>
+<section id="sec-full-factorial" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="sec-full-factorial"><span class="header-section-number">4.5.1</span> Full Factorial Designs</h3>
+<p>In a full factorial design all <span class="math inline">\(G\)</span> treatment combinations are run. Order the groups lexicographically by their factor levels with the last factor varying fastest, so that <span class="math inline">\(\mu\)</span> lists the cell means in this order. For each factor <span class="math inline">\(f_k\)</span> choose a <em>within-factor contrast matrix</em> <span class="math inline">\(\Gamma_k \in \mathbb{R}^{(L_{f_k}-1) \times L_{f_k}}\)</span> with full row rank and zero row sums, for instance successive differences as in <a href="#sec-testing-equality" class="quarto-xref">Section&nbsp;4.4</a>, and let <span class="math inline">\(m_k' := L_{f_k}^{-1}\mathbb{1}_{L_{f_k}}'\)</span> denote the averaging row. The contrast matrix for <span class="math inline">\(\mathcal{S}\)</span> is the Kronecker product <span id="eq-kronecker-contrasts"><span class="math display">\[
+H_{\mathcal{S}} = \bigotimes_{k=1}^{K} A_k, \qquad A_k = \begin{cases} \Gamma_k, &amp; k \in \mathcal{S}, \\ m_k', &amp; k \notin \mathcal{S}, \end{cases}
+\tag{25}\]</span></span> which compares the levels of the factors in <span class="math inline">\(\mathcal{S}\)</span> and averages over the levels of all remaining factors <span class="citation" data-cites="pauly2015asymptotic algina1984implementing">(<a href="#ref-pauly2015asymptotic" role="doc-biblioref">Pauly et al. 2015</a>; see also <a href="#ref-algina1984implementing" role="doc-biblioref">Algina and Olejnik 1984</a>)</span>. It has <span class="math inline">\(W_{\mathcal{S}} = \prod_{k \in \mathcal{S}} (L_{f_k} - 1)\)</span> rows, each summing to zero, and full row rank, so <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> applies with <span class="math inline">\(W = W_{\mathcal{S}}\)</span> degrees of freedom. All admissible <span class="math inline">\(\Gamma_k\)</span> span the orthogonal complement of <span class="math inline">\(\mathbb{1}_{L_{f_k}}\)</span> and therefore differ only by invertible factors, which leave <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> unchanged, so the WTS does not depend on the coding; single rows do, and should match the comparisons of substantive interest.</p>
+<p><strong>Example 5 (<span class="math inline">\(3 \times 2\)</span> full factorial).</strong> <em>Factor <span class="math inline">\(A\)</span> has three levels and factor <span class="math inline">\(B\)</span> has two levels, for instance three discount levels crossed with two shipping options, and all <span class="math inline">\(G = 6\)</span> treatment combinations are run.</em></p>
+<p>Let <span class="math inline">\(\mu_{ab}\)</span> denote the mean of the cell with <span class="math inline">\(A = a\)</span> and <span class="math inline">\(B = b\)</span>, so that <span class="math display">\[
+\mu = (\mu_{11}, \mu_{12}, \mu_{21}, \mu_{22}, \mu_{31}, \mu_{32})'.
+\]</span> With successive differences, <span class="math display">\[
+\begin{aligned}
+\Gamma_A &amp;= \begin{bmatrix} -1 &amp; 1 &amp; 0 \\ 0 &amp; -1 &amp; 1 \end{bmatrix}, &amp;\qquad \Gamma_B &amp;= (-1 \;\; 1),
+\\[4pt]
+m_A' &amp;= \left(\tfrac{1}{3} \;\; \tfrac{1}{3} \;\; \tfrac{1}{3}\right), &amp;\qquad m_B' &amp;= \left(\tfrac{1}{2} \;\; \tfrac{1}{2}\right),
+\end{aligned}
+\]</span> and <a href="#eq-kronecker-contrasts" class="quarto-xref">Equation&nbsp;25</a> yields <span class="math display">\[
+\begin{aligned}
+H_A &amp;= \Gamma_A \otimes m_B' =
+\begin{bmatrix}
+-\tfrac{1}{2} &amp; -\tfrac{1}{2} &amp; \tfrac{1}{2} &amp; \tfrac{1}{2} &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; -\tfrac{1}{2} &amp; -\tfrac{1}{2} &amp; \tfrac{1}{2} &amp; \tfrac{1}{2}
+\end{bmatrix},
+\\[4pt]
+H_B &amp;= m_A' \otimes \Gamma_B = \tfrac{1}{3}
+\begin{bmatrix}
+-1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1
+\end{bmatrix},
+\\[4pt]
+H_{AB} &amp;= \Gamma_A \otimes \Gamma_B =
+\begin{bmatrix}
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; -1 &amp; -1 &amp; 1
+\end{bmatrix}.
+\end{aligned}
+\]</span> Write the marginal means and the effect of <span class="math inline">\(B\)</span> at level <span class="math inline">\(a\)</span> of <span class="math inline">\(A\)</span> as <span class="math display">\[
+\begin{aligned}
+\mu_{a\cdot} &amp;:= \tfrac{1}{2}(\mu_{a1} + \mu_{a2}), \\
+\mu_{\cdot b} &amp;:= \tfrac{1}{3}(\mu_{1b} + \mu_{2b} + \mu_{3b}), \\
+\delta_B(a) &amp;:= \mu_{a2} - \mu_{a1}.
+\end{aligned}
+\]</span> The contrasts are <span class="math display">\[
+\begin{aligned}
+H_A \mu &amp;= \begin{bmatrix} \mu_{2\cdot} - \mu_{1\cdot} \\ \mu_{3\cdot} - \mu_{2\cdot} \end{bmatrix},
+\\[4pt]
+H_B \mu &amp;= \mu_{\cdot 2} - \mu_{\cdot 1},
+\\[4pt]
+H_{AB} \mu &amp;= \begin{bmatrix} \delta_B(2) - \delta_B(1) \\ \delta_B(3) - \delta_B(2) \end{bmatrix},
+\end{aligned}
+\]</span> with <span class="math inline">\(W = 2\)</span>, <span class="math inline">\(1\)</span>, and <span class="math inline">\(2\)</span> degrees of freedom. The hypothesis <span class="math inline">\(H_{AB}\mu = 0\)</span> states that the effect of <span class="math inline">\(B\)</span> is the same at all three levels of <span class="math inline">\(A\)</span>; each of its rows is the <span class="math inline">\(2 \times 2\)</span> interaction contrast of <a href="#sec-causal-inference" class="quarto-xref">Section&nbsp;2.4.1</a> applied to two adjacent levels of <span class="math inline">\(A\)</span>.</p>
+</section>
+<section id="sec-fractional-factorial" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="sec-fractional-factorial"><span class="header-section-number">4.5.2</span> Fractional Factorial Designs</h3>
+<p>With many factors or levels a full factorial design becomes impractical: the number of groups grows multiplicatively, and every additional group reduces the group sizes <span class="math inline">\(N_g\)</span> on which the large-sample approximations rest. A <em>fractional factorial design</em> runs only a suitably chosen subset of the treatment combinations, which then form the <span class="math inline">\(G &lt; \prod_k L_{f_k}\)</span> groups of the analysis. Effects that the design cannot separate are <em>aliased</em>, and an effect is identified only under an assumption on its aliases, conventionally that they are zero <span class="citation" data-cites="box1978statistics wu2011experiments mukerjee2006modern">(<a href="#ref-box1978statistics" role="doc-biblioref">Box et al. 1978</a>; <a href="#ref-wu2011experiments" role="doc-biblioref">Wu and Hamada 2011</a>; <a href="#ref-mukerjee2006modern" role="doc-biblioref">Mukerjee and Wu 2006</a>)</span>. A design is specified by its design table, which lists the coded factor levels of each group, <span class="math inline">\(-\)</span> and <span class="math inline">\(+\)</span> or <span class="math inline">\(-1\)</span> and <span class="math inline">\(+1\)</span> for two-level factors; the following example derives the contrasts from this table.</p>
+<p><strong>Example 6 (<span class="math inline">\(2^{5-2}\)</span> fractional factorial).</strong> <em>Five two-level factors <span class="math inline">\(A, B, C, D, E\)</span> are studied in <span class="math inline">\(G = 2^{5-2} = 8\)</span> groups, a quarter of the <span class="math inline">\(2^5 = 32\)</span> treatment combinations.</em></p>
+<p><a href="#tbl-fraction-design" class="quarto-xref">Table&nbsp;1</a> is the design table: a full <span class="math inline">\(2^3\)</span> design in the factors <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, with the levels of the remaining two factors set by the <em>generators</em> <span class="math inline">\(D = AB\)</span> and <span class="math inline">\(E = AC\)</span>, where a product of factor letters denotes the elementwise product of their coded columns (the <em>product column</em> of that effect).</p>
+<div id="tbl-fraction-design" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fraction-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Design table of the <span class="math inline">\(2^{5-2}\)</span> fraction with generators <span class="math inline">\(D = AB\)</span> and <span class="math inline">\(E = AC\)</span>.
+</figcaption>
+<div aria-describedby="tbl-fraction-design-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">group <span class="math inline">\(g\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(A\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(B\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(C\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(D = AB\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(E = AC\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(+\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Here two effects are aliased exactly when their product columns coincide on the eight groups. Of the <span class="math inline">\(2^5 - 1 = 31\)</span> effects, <span class="math inline">\(28\)</span> fall into seven alias classes of four; the product columns of the remaining three, <span class="math inline">\(ABD\)</span>, <span class="math inline">\(ACE\)</span>, and <span class="math inline">\(BCDE\)</span>, equal <span class="math inline">\(+1\)</span> in every group and yield no contrast, and the shortest of them has three letters, so the design has resolution III <span class="citation" data-cites="box1961fractional">(<a href="#ref-box1961fractional" role="doc-biblioref">Box and Hunter 1961, 319</a>)</span>. Each alias class gives one row of the contrast matrix <span class="math inline">\(H\)</span>: the columns <span class="math inline">\(A, \ldots, E\)</span> of <a href="#tbl-fraction-design" class="quarto-xref">Table&nbsp;1</a>, read from top to bottom, and, for the two classes without a main effect, the product columns <span class="math inline">\(BC\)</span> and <span class="math inline">\(BE\)</span>. Scaled by <span class="math inline">\(\tfrac{1}{4}\)</span>, each row gives the average of the four group means with sign <span class="math inline">\(+\)</span> minus the average of the four with sign <span class="math inline">\(-\)</span>: <span id="eq-fraction-contrasts"><span class="math display">\[
+\begin{aligned}
+H &amp;= \frac{1}{4}
+\begin{bmatrix}
+-1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+-1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 \\
+-1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 \\
+1 &amp; 1 &amp; -1 &amp; -1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 \\
+1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 &amp; -1 &amp; 1 \\
+1 &amp; -1 &amp; -1 &amp; 1 &amp; 1 &amp; -1 &amp; -1 &amp; 1 \\
+-1 &amp; 1 &amp; 1 &amp; -1 &amp; 1 &amp; -1 &amp; -1 &amp; 1
+\end{bmatrix},
+\\[4pt]
+H \mu &amp;=
+\begin{bmatrix}
+\tau_A + \tau_{BD} + \tau_{CE} + \tau_{ABCDE} \\
+\tau_B + \tau_{AD} + \tau_{CDE} + \tau_{ABCE} \\
+\tau_C + \tau_{AE} + \tau_{BDE} + \tau_{ABCD} \\
+\tau_D + \tau_{AB} + \tau_{BCE} + \tau_{ACDE} \\
+\tau_E + \tau_{AC} + \tau_{BCD} + \tau_{ABDE} \\
+\tau_{BC} + \tau_{DE} + \tau_{ABE} + \tau_{ACD} \\
+\tau_{BE} + \tau_{CD} + \tau_{ABC} + \tau_{ADE}
+\end{bmatrix},
+\end{aligned}
+\tag{26}\]</span></span> where <span class="math inline">\(\mu = (\mu_1, \ldots, \mu_8)'\)</span> collects the means of the eight groups and <span class="math inline">\(\tau_{\mathcal{S}}\)</span> is the effect of the factor subset <span class="math inline">\(\mathcal{S}\)</span> in the full <span class="math inline">\(2^5\)</span> design, <span class="math display">\[
+\tau_{\mathcal{S}} := \frac{1}{16} \sum_{x \in \{-1, +1\}^5} \Big( \prod_{k \in \mathcal{S}} x_k \Big)\, \mu(x),
+\]</span> with <span class="math inline">\(\mu(x)\)</span> the mean of the treatment combination with coded levels <span class="math inline">\(x = (x_A, \ldots, x_E)\)</span>, so that <span class="math inline">\(\mu_g = \mu(x)\)</span> for row <span class="math inline">\(g\)</span> of <a href="#tbl-fraction-design" class="quarto-xref">Table&nbsp;1</a>; <span class="math inline">\(\tau_{\mathcal{S}}\)</span> equals <span class="math inline">\(2^{-(|\mathcal{S}|-1)}\)</span> times the contrast <a href="#eq-kronecker-contrasts" class="quarto-xref">Equation&nbsp;25</a> with <span class="math inline">\(\Gamma_k = (-1 \;\; 1)\)</span>. The matrix <span class="math inline">\(H\)</span> has full row rank <span class="math inline">\(W = 7 = G - 1\)</span>, so <a href="#eq-WTS" class="quarto-xref">Equation&nbsp;5</a> applies to any selection of its rows. The first row of <span class="math inline">\(H\mu\)</span> is the main effect <span class="math inline">\(\tau_A\)</span> if the interactions <span class="math inline">\(BD\)</span>, <span class="math inline">\(CE\)</span>, and <span class="math inline">\(ABCDE\)</span> are zero, and analogously for the other rows; if all interactions are zero, the first five rows are the five main effects, while the last two rows contain interactions only and provide a partial check of that assumption.</p>
+</section>
+</section>
+</section>
+<section id="sec-appendix" class="level1 unnumbered">
+<h1 class="unnumbered">Appendix</h1>
+<p>Derivations for the planning formulas of <a href="#sec-power-analysis-contrasts" class="quarto-xref">Section&nbsp;2.4.3</a>, on which <a href="#sec-power" class="quarto-xref">Section&nbsp;2.3</a> draws for <span class="math inline">\(W = 1\)</span>.</p>
+<p><strong>Derivation of <a href="#eq-noncentrality" class="quarto-xref">Equation&nbsp;11</a>.</strong> Decomposing the test statistic around the truth gives</p>
+<p><span class="math display">\[
+Z = \frac{\hat{C} - C_0}{\sqrt{\widehat{\text{Var}}[\hat{C}]}} = \frac{\hat{C} - C}{\sqrt{\widehat{\text{Var}}[\hat{C}]}} + \frac{\delta}{\sqrt{\widehat{\text{Var}}[\hat{C}]}},
+\]</span></p>
+<p>where the first term is asymptotically standard normal — by the same argument that gives the null distribution of <span class="math inline">\(Z\)</span> — and the second equals <span class="math inline">\(\lambda\)</span> times a factor that tends to one in probability, since <span class="math inline">\(N\,\widehat{\text{Var}}[\hat{C}] \xrightarrow{P} \bar{V}_C\)</span>. Setting <span class="math inline">\(\delta = 0\)</span> recovers the null distribution, so one formula covers both hypotheses. The approximation is rigorous under local alternatives <span class="math inline">\(\delta = \delta^\ast/\sqrt{N}\)</span> along which the two conditions of <a href="#sec-general-framework" class="quarto-xref">Section&nbsp;2.1</a> continue to hold: then <span class="math inline">\(\lambda = \delta^\ast/\sqrt{\bar{V}_C}\)</span> and <span class="math inline">\(Z - \lambda \xrightarrow{D} N(0,1)\)</span> <span class="citation" data-cites="vandervaart1998asymptotic">(<a href="#ref-vandervaart1998asymptotic" role="doc-biblioref">Vaart 1998</a>)</span>. For fixed <span class="math inline">\(\delta \neq 0\)</span> the noncentrality diverges and power tends to one, but <span class="math inline">\(Z - \lambda\)</span> is in general not asymptotically standard normal, because the estimation error of the variance is multiplied by the diverging <span class="math inline">\(\lambda\)</span>. For a <span class="math inline">\(\sqrt{N}\)</span>-consistent variance estimator the discrepancy is of order <span class="math inline">\(\delta/\sqrt{\bar{V}_C} = \lambda/\sqrt{N}\)</span>, so <a href="#eq-noncentrality" class="quarto-xref">Equation&nbsp;11</a> is accurate whenever <span class="math inline">\(\lambda\)</span> is small relative to <span class="math inline">\(\sqrt{N}\)</span>, that is, at the effects for which power is not already near one.</p>
+<p><strong>Derivation of <a href="#eq-power-function" class="quarto-xref">Equation&nbsp;12</a>.</strong> Under the normal approximation <a href="#eq-noncentrality" class="quarto-xref">Equation&nbsp;11</a>, the power of the two-sided test is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\pi &amp;= P\big[|Z| &gt; z_{1-\alpha/2}\big] \\
+&amp;= \Phi_{0,1}(\lambda - z_{1-\alpha/2}) + \Phi_{0,1}(-\lambda - z_{1-\alpha/2});
+\end{aligned}
+\]</span></p>
+<p>at <span class="math inline">\(\delta = 0\)</span> the right side equals <span class="math inline">\(\alpha\)</span>, confirming the size of the test. The second term is the probability of rejecting with the wrong sign. It is negligible unless <span class="math inline">\(\lambda\)</span> is close to zero, and omitting it understates power, so <a href="#eq-power-function" class="quarto-xref">Equation&nbsp;12</a> is conservative for planning.</p>
+</section>
+<section id="references" class="level1 unnumbered">
+<h1 class="unnumbered">References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-algina1984implementing" class="csl-entry" role="listitem">
+Algina, James, and Stephen F Olejnik. 1984. <span>“Implementing the Welch-James Procedure with Factorial Designs.”</span> <em>Educational and Psychological Measurement</em> 44 (1): 39–48.
+</div>
+<div id="ref-box1961fractional" class="csl-entry" role="listitem">
+Box, G. E. P., and J. S. Hunter. 1961. <span>“The <span><span class="math inline">\(2^{k-p}\)</span></span> Fractional Factorial Designs <span>P</span>art <span>I</span>.”</span> <em>Technometrics</em> 3 (3): 311–51. <a href="https://doi.org/10.1080/00401706.1961.10489951">https://doi.org/10.1080/00401706.1961.10489951</a>.
+</div>
+<div id="ref-box1978statistics" class="csl-entry" role="listitem">
+Box, George E. P., William G. Hunter, and J. Stuart Hunter. 1978. <em>Statistics for Experimenters: An Introduction to Design, Data Analysis, and Model Building</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-bretz2016multiple" class="csl-entry" role="listitem">
+Bretz, Frank, Torsten Hothorn, and Peter Westfall. 2010. <em>Multiple Comparisons Using r</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-brunner2001nonparametric" class="csl-entry" role="listitem">
+Brunner, Edgar, and Madan L Puri. 2001. <span>“Nonparametric Methods in Factorial Designs.”</span> <em>Statistical Papers</em> 42 (1): 1–52.
+</div>
+<div id="ref-cochran1977sampling" class="csl-entry" role="listitem">
+Cochran, William G. 1977. <em>Sampling Techniques</em>. 3rd ed. John Wiley &amp; Sons.
+</div>
+<div id="ref-cohen1988statistical" class="csl-entry" role="listitem">
+Cohen, Jacob. 1988. <em>Statistical Power Analysis for the Behavioral Sciences</em>. 2nd ed. Lawrence Erlbaum Associates.
+</div>
+<div id="ref-collins2014factorial" class="csl-entry" role="listitem">
+Collins, Linda M, John J Dziak, Kari C Kugler, and Jessica B Trail. 2014. <span>“Factorial Experiments: Efficient Tools for Evaluation of Intervention Components.”</span> <em>American Journal of Preventive Medicine</em> 47 (4): 498–504.
+</div>
+<div id="ref-cox2000theory" class="csl-entry" role="listitem">
+Cox, David Roxbee, and Nancy Reid. 2000. <em>The Theory of the Design of Experiments</em>. Chapman; Hall/CRC.
+</div>
+<div id="ref-dean1999design" class="csl-entry" role="listitem">
+Dean, Angela, and Daniel Voss. 1999. <em>Design and Analysis of Experiments</em>. Springer.
+</div>
+<div id="ref-changyong2014log" class="csl-entry" role="listitem">
+Feng, Changyong, Hongyue Wang, Naiji Lu, et al. 2014. <span>“Log-Transformation and Its Implications for Data Analysis.”</span> <em>Shanghai Archives of Psychiatry</em> 26 (2): 105–9.
+</div>
+<div id="ref-friedrich2017permuting" class="csl-entry" role="listitem">
+Friedrich, Sarah, Edgar Brunner, and Markus Pauly. 2017. <span>“Permuting Longitudinal Data in Spite of the Dependencies.”</span> <em>Journal of Multivariate Analysis</em> 153: 255–65. <a href="https://doi.org/10.1016/j.jmva.2016.10.004">https://doi.org/10.1016/j.jmva.2016.10.004</a>.
+</div>
+<div id="ref-genz2009computation" class="csl-entry" role="listitem">
+Genz, Alan, and Frank Bretz. 2009. <em>Computation of Multivariate Normal and t Probabilities</em>. Vol. 195. Lecture Notes in Statistics. Springer. <a href="https://doi.org/10.1007/978-3-642-01689-9">https://doi.org/10.1007/978-3-642-01689-9</a>.
+</div>
+<div id="ref-ghosh1973monotonicity" class="csl-entry" role="listitem">
+Ghosh, B. K. 1973. <span>“Some Monotonicity Theorems for <span><span class="math inline">\(\chi^2\)</span></span>, <span><span class="math inline">\(F\)</span></span> and <span><span class="math inline">\(t\)</span></span> Distributions with Applications.”</span> <em>Journal of the Royal Statistical Society: Series B (Methodological)</em> 35 (3): 480–92.
+</div>
+<div id="ref-grieve1991confidence" class="csl-entry" role="listitem">
+Grieve, Andrew P. 1991. <span>“Confidence Intervals and Sample Sizes.”</span> <em>Biometrics</em> 47 (4): 1597–603.
+</div>
+<div id="ref-herberich2010robust" class="csl-entry" role="listitem">
+Herberich, Esther, Johannes Sikorski, and Torsten Hothorn. 2010. <span>“A Robust Procedure for Comparing Multiple Means Under Heteroscedasticity in Unbalanced Designs.”</span> <em>PloS One</em> 5 (3): e9788.
+</div>
+<div id="ref-hettmansperger2010robust" class="csl-entry" role="listitem">
+Hettmansperger, Thomas P, and Joseph W McKean. 2010. <em>Robust Nonparametric Statistical Methods</em>. CRC Press.
+</div>
+<div id="ref-hinkelmann2012design" class="csl-entry" role="listitem">
+Hinkelmann, Klaus, ed. 2012. <em>Design and Analysis of Experiments, Volume 3: Special Designs and Applications</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-hinkelmann2005design" class="csl-entry" role="listitem">
+Hinkelmann, Klaus, and Oscar Kempthorne. 2005. <em>Design and Analysis of Experiments, Volume 2: Advanced Experimental Design</em>. Wiley.
+</div>
+<div id="ref-hinkelmann2007design" class="csl-entry" role="listitem">
+Hinkelmann, Klaus, and Oscar Kempthorne. 2007. <em>Design and Analysis of Experiments, Volume 1: Introduction to Experimental Design</em>. Vol. 1. John Wiley &amp; Sons.
+</div>
+<div id="ref-hothorn2008simultaneous" class="csl-entry" role="listitem">
+Hothorn, Torsten, Frank Bretz, and Peter Westfall. 2008. <span>“Simultaneous Inference in General Parametric Models.”</span> <em>Biometrical Journal: Journal of Mathematical Methods in Biosciences</em> 50 (3): 346–63.
+</div>
+<div id="ref-james1951comparison" class="csl-entry" role="listitem">
+James, G. S. 1951. <span>“The Comparison of Several Groups of Observations When the Ratios of the Population Variances Are Unknown.”</span> <em>Biometrika</em> 38 (3–4): 324–29. <a href="https://doi.org/10.2307/2332578">https://doi.org/10.2307/2332578</a>.
+</div>
+<div id="ref-jan2011optimal" class="csl-entry" role="listitem">
+Jan, Show-Li, and Gwowen Shieh. 2011. <span>“Optimal Sample Sizes for Welch’s Test Under Various Allocation and Cost Considerations.”</span> <em>Behavior Research Methods</em> 43: 1014–22.
+</div>
+<div id="ref-jan2014sample" class="csl-entry" role="listitem">
+Jan, Show-Li, and Gwowen Shieh. 2014. <span>“Sample Size Determinations for <span>Welch</span>’s Test in One-Way Heteroscedastic <span>ANOVA</span>.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 67 (1): 72–93. <a href="https://doi.org/10.1111/bmsp.12006">https://doi.org/10.1111/bmsp.12006</a>.
+</div>
+<div id="ref-kelley2003obtaining" class="csl-entry" role="listitem">
+Kelley, Ken, Scott E. Maxwell, and Joseph R. Rausch. 2003. <span>“Obtaining Power or Obtaining Precision: Delineating Methods of Sample-Size Planning.”</span> <em>Evaluation &amp; the Health Professions</em> 26 (3): 258–87.
+</div>
+<div id="ref-kiviet2012monte" class="csl-entry" role="listitem">
+Kiviet, Jan F. 2012. <span>“Monte Carlo Simulation for Econometricians.”</span> <em>Foundations and Trends in Econometrics</em> 5 (1–2): 1–181. <a href="https://doi.org/10.1561/0800000011">https://doi.org/10.1561/0800000011</a>.
+</div>
+<div id="ref-kohavi2013online" class="csl-entry" role="listitem">
+Kohavi, Ron, Alex Deng, Brian Frasca, Toby Walker, Ya Xu, and Nils Pohlmann. 2013. <span>“Online Controlled Experiments at Large Scale.”</span> <em>Proceedings of the 19th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1168–76.
+</div>
+<div id="ref-konietschke2015parametric" class="csl-entry" role="listitem">
+Konietschke, Frank, Arne C. Bathke, Solomon W. Harrar, and Markus Pauly. 2015. <span>“Parametric and Nonparametric Bootstrap Methods for General <span>MANOVA</span>.”</span> <em>Journal of Multivariate Analysis</em> 140: 291–301. <a href="https://doi.org/10.1016/j.jmva.2015.05.001">https://doi.org/10.1016/j.jmva.2015.05.001</a>.
+</div>
+<div id="ref-konietschke2023rankfd" class="csl-entry" role="listitem">
+Konietschke, Frank, and Edgar Brunner. 2023. <span>“rankFD: An r Software Package for Nonparametric Analysis of General Factorial Designs.”</span> <em>The R Journal</em> 15 (1): 142–58.
+</div>
+<div id="ref-lai2012accuracy" class="csl-entry" role="listitem">
+Lai, Keke, and Ken Kelley. 2012. <span>“Accuracy in Parameter Estimation for <span>ANCOVA</span> and <span>ANOVA</span> Contrasts: Sample Size Planning via Narrow Confidence Intervals.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 65 (2): 350–70.
+</div>
+<div id="ref-ledolter2007testing" class="csl-entry" role="listitem">
+Ledolter, Johannes, and Arthur J Swersey. 2007. <em>Testing 1-2-3: Experimental Design with Applications in Marketing and Service Operations</em>. Stanford University Press.
+</div>
+<div id="ref-lewis2015unfavorable" class="csl-entry" role="listitem">
+Lewis, Randall A, and Justin M Rao. 2015. <span>“The Unfavorable Economics of Measuring the Returns to Advertising.”</span> <em>The Quarterly Journal of Economics</em> 130 (4): 1941–73.
+</div>
+<div id="ref-lewis1999analysis" class="csl-entry" role="listitem">
+Lewis, Sharon L, Douglas C Montgomery, and Raymond H Myers. 1999. <span>“The Analysis of Designed Experiments with Non-Normal Responses.”</span> <em>Quality Engineering</em> 12 (2): 225–43.
+</div>
+<div id="ref-list2011so" class="csl-entry" role="listitem">
+List, John A., Sally Sadoff, and Mathis Wagner. 2011. <span>“So You Want to Run an Experiment, Now What? <span>Some</span> Simple Rules of Thumb for Optimal Experimental Design.”</span> <em>Experimental Economics</em> 14 (4): 439–57. <a href="https://doi.org/10.1007/s10683-011-9275-7">https://doi.org/10.1007/s10683-011-9275-7</a>.
+</div>
+<div id="ref-liu2009sample" class="csl-entry" role="listitem">
+Liu, Xiaofeng Steven. 2009. <span>“Sample Size and the Width of the Confidence Interval for Mean Difference.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 62 (2): 201–15.
+</div>
+<div id="ref-maxwell2008sample" class="csl-entry" role="listitem">
+Maxwell, Scott E., Ken Kelley, and Joseph R. Rausch. 2008. <span>“Sample Size Planning for Statistical Power and Accuracy in Parameter Estimation.”</span> <em>Annual Review of Psychology</em> 59: 537–63.
+</div>
+<div id="ref-montgomery2017design" class="csl-entry" role="listitem">
+Montgomery, Douglas C. 2017. <em>Design and Analysis of Experiments</em>. John wiley &amp; sons.
+</div>
+<div id="ref-mukerjee2006modern" class="csl-entry" role="listitem">
+Mukerjee, Rahul, and Chien-Fu Wu. 2006. <em>A Modern Theory of Factorial Design</em>. Springer.
+</div>
+<div id="ref-myers2016response" class="csl-entry" role="listitem">
+Myers, Raymond H, Douglas C Montgomery, and Christine M Anderson-Cook. 2016. <em>Response Surface Methodology: Process and Product Optimization Using Designed Experiments</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-neyman1934two" class="csl-entry" role="listitem">
+Neyman, Jerzy. 1934. <span>“On the Two Different Aspects of the Representative Method: The Method of Stratified Sampling and the Method of Purposive Selection.”</span> <em>Journal of the Royal Statistical Society</em> 97 (4): 558–625.
+</div>
+<div id="ref-pauly2015asymptotic" class="csl-entry" role="listitem">
+Pauly, Markus, Edgar Brunner, and Frank Konietschke. 2015. <span>“Asymptotic Permutation Tests in General Factorial Designs.”</span> <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 77 (2): 461–73. <a href="https://doi.org/10.1111/rssb.12073">https://doi.org/10.1111/rssb.12073</a>.
+</div>
+<div id="ref-rao1973linear" class="csl-entry" role="listitem">
+Rao, C. Radhakrishna. 1973. <em>Linear Statistical Inference and Its Applications</em>. 2nd ed. Wiley Series in Probability and Mathematical Statistics. John Wiley &amp; Sons.
+</div>
+<div id="ref-rencher2008linear" class="csl-entry" role="listitem">
+Rencher, Alvin C, and G Bruce Schaalje. 2008. <em>Linear Models in Statistics</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-ritz2019dose" class="csl-entry" role="listitem">
+Ritz, Christian, Signe Marie Jensen, Daniel Gerhard, and Jens Carl Streibig. 2019. <em>Dose-Response Analysis Using r</em>. CRC Press.
+</div>
+<div id="ref-rothman2018planning" class="csl-entry" role="listitem">
+Rothman, Kenneth J., and Sander Greenland. 2018. <span>“Planning Study Size Based on Precision Rather Than Power.”</span> <em>Epidemiology</em> 29 (5): 599–603.
+</div>
+<div id="ref-rubin2008objective" class="csl-entry" role="listitem">
+Rubin, Donald B. 2008. <span>“For Objective Causal Inference, Design Trumps Analysis.”</span> <em>The Annals of Applied Statistics</em> 2 (3): 808–40.
+</div>
+<div id="ref-schuirmann1987comparison" class="csl-entry" role="listitem">
+Schuirmann, Donald J. 1987. <span>“A Comparison of the Two One-Sided Tests Procedure and the Power Approach for Assessing the Equivalence of Average Bioavailability.”</span> <em>Journal of Pharmacokinetics and Biopharmaceutics</em> 15 (6): 657–80. <a href="https://doi.org/10.1007/BF01068419">https://doi.org/10.1007/BF01068419</a>.
+</div>
+<div id="ref-serfling1980approximation" class="csl-entry" role="listitem">
+Serfling, Robert J. 1980. <em>Approximation Theorems of Mathematical Statistics</em>. John Wiley &amp; Sons.
+</div>
+<div id="ref-shieh2005power" class="csl-entry" role="listitem">
+Shieh, Gwowen. 2005. <span>“On Power and Sample Size Calculations for <span>Wald</span> Tests in Generalized Linear Models.”</span> <em>Journal of Statistical Planning and Inference</em> 128 (1): 43–59. <a href="https://doi.org/10.1016/j.jspi.2003.09.017">https://doi.org/10.1016/j.jspi.2003.09.017</a>.
+</div>
+<div id="ref-sidak1967rectangular" class="csl-entry" role="listitem">
+Šidák, Zbyněk. 1967. <span>“Rectangular Confidence Regions for the Means of Multivariate Normal Distributions.”</span> <em>Journal of the American Statistical Association</em> 62 (318): 626–33. <a href="https://doi.org/10.1080/01621459.1967.10482935">https://doi.org/10.1080/01621459.1967.10482935</a>.
+</div>
+<div id="ref-stroud1973noncentral" class="csl-entry" role="listitem">
+Stroud, T. W. F. 1973. <span>“Noncentral Convergence of <span>Wald</span>’s Large-Sample Test Statistic in Exponential Families.”</span> <em>The Annals of Statistics</em> 1 (1): 161–65.
+</div>
+<div id="ref-vandervaart1998asymptotic" class="csl-entry" role="listitem">
+Vaart, Aad W. van der. 1998. <em>Asymptotic Statistics</em>. Cambridge University Press.
+</div>
+<div id="ref-welch1938significance" class="csl-entry" role="listitem">
+Welch, Bernard L. 1938. <span>“The Significance of the Difference Between Two Means When the Population Variances Are Unequal.”</span> <em>Biometrika</em> 29 (3–4): 350–62. <a href="https://doi.org/10.2307/2332010">https://doi.org/10.2307/2332010</a>.
+</div>
+<div id="ref-welch1947generalization" class="csl-entry" role="listitem">
+Welch, Bernard L. 1947. <span>“The Generalization of <span>‘<span>Student</span>’s’</span> Problem When Several Different Population Variances Are Involved.”</span> <em>Biometrika</em> 34 (1–2): 28–35. <a href="https://doi.org/10.2307/2332510">https://doi.org/10.2307/2332510</a>.
+</div>
+<div id="ref-welch1951comparison" class="csl-entry" role="listitem">
+Welch, Bernard L. 1951. <span>“On the Comparison of Several Mean Values: An Alternative Approach.”</span> <em>Biometrika</em> 38 (3–4): 330–36. <a href="https://doi.org/10.2307/2332579">https://doi.org/10.2307/2332579</a>.
+</div>
+<div id="ref-wellek2010testing" class="csl-entry" role="listitem">
+Wellek, Stefan. 2010. <em>Testing Statistical Hypotheses of Equivalence and Noninferiority</em>. 2nd ed. Chapman &amp; Hall/CRC.
+</div>
+<div id="ref-wiens2017performing" class="csl-entry" role="listitem">
+Wiens, Stefan, and Mats E Nilsson. 2017. <span>“Performing Contrast Analysis in Factorial Designs: From NHST to Confidence Intervals and Beyond.”</span> <em>Educational and Psychological Measurement</em> 77 (4): 690–715.
+</div>
+<div id="ref-wu2011experiments" class="csl-entry" role="listitem">
+Wu, CF Jeff, and Michael S Hamada. 2011. <em>Experiments: Planning, Analysis, and Optimization</em>. 2nd ed. John Wiley &amp; Sons.
+</div>
+</div>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Synonyms are multi-armed experiments, multivariable tests (MVTs), multi-armed trials or A/B/n tests.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Often the terms variable of interest, dependent variable or endpoint are interchangeably used in the statistical literature for the outcome variable.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Categorical and ordinal outcomes need to be dummy encoded before this procedure can be applied for them.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>A frequently used synonym in the experimentation domain is independent variable (IV).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Not to be confused with the effect <span class="math inline">\(\delta = C - C_0\)</span> of <a href="#sec-power-analysis-contrasts" class="quarto-xref">Section&nbsp;2.4.3</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/unbiasedestimation\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Oliver Brose</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

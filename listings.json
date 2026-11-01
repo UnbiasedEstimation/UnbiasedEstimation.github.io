@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/content/06-causal-inference/02-randomized-experiments/large-sample-multigroup-rcts/paper.html",
       "/content/03-statistics/bayesian/inference-as-frequentist/index.html",
       "/content/03-statistics/bayesian/wasserman-on-bayesian/index.html",
       "/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/advanced-techniques-dont-work/index.html",
@@ -34,7 +35,9 @@
   },
   {
     "listing": "/papers.html",
-    "items": []
+    "items": [
+      "/content/06-causal-inference/02-randomized-experiments/large-sample-multigroup-rcts/paper.html"
+    ]
   },
   {
     "listing": "/blog.html",
