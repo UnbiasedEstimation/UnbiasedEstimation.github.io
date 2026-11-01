@@ -88,6 +88,28 @@ def parse_frontmatter(path):
         fm[key] = val
     return fm
 
+# Our own frontmatter keys that share a name with a Quarto option. Quarto
+# validates them on every page, so they are dropped from the copy.
+STRIP_KEYS = (
+    "progress",  # reveal.js option, must be boolean; ours is a percentage
+)
+
+def strip_keys(text):
+    """Remove STRIP_KEYS (with any indented continuation lines) from the frontmatter."""
+    if not text.startswith("---"):
+        return text
+    end = text.find("\n---", 4)
+    if end == -1:
+        return text
+    kept, skipping = [], False
+    for line in text[4:end].splitlines(keepends=True):
+        m = re.match(r"^([A-Za-z][A-Za-z0-9_-]*)\s*:", line)
+        if m:
+            skipping = m.group(1) in STRIP_KEYS
+        if not skipping:
+            kept.append(line)
+    return text[:4] + "".join(kept) + text[end:]
+
 count_total = 0
 count_kept = 0
 synced = []
@@ -106,11 +128,12 @@ for path in src_root.rglob("*"):
     flag = fm.get("publish-to-website", "").lower()
     if flag != "true":
         continue
-    # Copy file
+    # Copy file, minus frontmatter keys that clash with Quarto options
     rel = path.relative_to(src_root)
     dest = dest_root / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(path, dest)
+    dest.write_text(strip_keys(path.read_text(encoding="utf-8")), encoding="utf-8")
+    shutil.copystat(path, dest)
     # Copy sibling asset folders (figures/, images/, assets/)
     for asset_dir in ("figures", "images", "assets"):
         src_asset = path.parent / asset_dir
