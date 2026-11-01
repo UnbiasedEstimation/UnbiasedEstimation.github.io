@@ -76,40 +76,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -216,7 +187,6 @@ window.Quarto = {
 <p>Even if we now find good ideas C, D, E, etc., we first still need to pay for the losses of our incorrect previous test result … just to get to the point where we started!</p>
 <p>This is especially relevant if you try to improve something with A/B testing that already works close to optimum. For example, consider optimizing email marketing in a mature company. Suppose that the email marketing is already close to optimum with respect to revenue (or profit) per subscriber, and the goal is to further improve it by testing new ideas. Only a few ideas might improve the business, but many more can hurt it. Here, A/B testing can rarely deliver wins, because they are rare.</p>
 <p>The key value here is limiting the implementation of ideas that make the business worse.</p>
-
 
 
 

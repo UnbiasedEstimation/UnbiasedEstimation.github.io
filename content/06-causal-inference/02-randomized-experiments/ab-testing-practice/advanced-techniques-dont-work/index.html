@@ -76,40 +76,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -213,7 +184,6 @@ window.Quarto = {
 <p>I remember leading a small research project to implement regression-adjusted estimators to improve A/B testing for email marketing. The goal was to test better on hard KPIs like revenue per customer or profit per customer. These KPIs have notoriously high variance, so even massive sample sizes only result in low power. We tested sophisticated methods, including ML-boosted regression adjustment [1], and literally used all available data from the database.</p>
 <p>After many weeks of fine-tuning, we realized: we can get real power gains and transform mediocre test setups into good test setups. But some untestable setups will forever remain untestable setups.</p>
 <p>Expectation management is key: data science is still just science, and not science fiction.</p>
-
 
 
 

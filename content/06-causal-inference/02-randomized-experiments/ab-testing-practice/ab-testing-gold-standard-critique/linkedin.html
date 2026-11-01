@@ -75,40 +75,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -203,7 +174,6 @@ window.Quarto = {
 <p>Essentially, we are interested in the long-term impact on Y, but we only get short-term results on Z. This is a slippery slope: we must combine evidence from the test with additional untestable assumptions to infer from short-term Z (what we measure) to long-term Y (what we actually care about). This can work! But maybe it does not. Also: getting reliable short-term results on Z can already be challenging (e.g., interference, data quality, etc.).</p>
 <p>Now, we need to do something and A/B tests may be better than the alternatives in many cases. But in my opinion, the label “gold standard” is attached too often to results that don’t deserve it.</p>
 <p>Back to the original question: should we really call A/B testing the “gold standard for causal inference” in marketing and tech?</p>
-
 
 
 

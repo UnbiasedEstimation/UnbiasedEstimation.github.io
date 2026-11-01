@@ -49,7 +49,6 @@
 <p>[5] Theil, H. &amp; Goldberger, A. An Interpretation and Implementation of the Theil-Goldberger ‘Mixed’ Estimator. <a href="https://ideas.repec.org/p/boc/chic11/14.html">RePEc</a></p>
 
 
-
 </section>
 
  ]]></description>
@@ -85,7 +84,6 @@
 <p>[2] Kleijn, B. (2022). <em>The Frequentist Theory of Bayesian Statistics</em>. <a href="https://lnkd.in/eMjpgtT5" class="uri">https://lnkd.in/eMjpgtT5</a></p>
 
 
-
 </section>
 
  ]]></description>
@@ -112,7 +110,6 @@
 <p>I remember leading a small research project to implement regression-adjusted estimators to improve A/B testing for email marketing. The goal was to test better on hard KPIs like revenue per customer or profit per customer. These KPIs have notoriously high variance, so even massive sample sizes only result in low power. We tested sophisticated methods, including ML-boosted regression adjustment [1], and literally used all available data from the database.</p>
 <p>After many weeks of fine-tuning, we realized: we can get real power gains and transform mediocre test setups into good test setups. But some untestable setups will forever remain untestable setups.</p>
 <p>Expectation management is key: data science is still just science, and not science fiction.</p>
-
 
 
 
@@ -143,7 +140,6 @@
 <p>Even if we now find good ideas C, D, E, etc., we first still need to pay for the losses of our incorrect previous test result … just to get to the point where we started!</p>
 <p>This is especially relevant if you try to improve something with A/B testing that already works close to optimum. For example, consider optimizing email marketing in a mature company. Suppose that the email marketing is already close to optimum with respect to revenue (or profit) per subscriber, and the goal is to further improve it by testing new ideas. Only a few ideas might improve the business, but many more can hurt it. Here, A/B testing can rarely deliver wins, because they are rare.</p>
 <p>The key value here is limiting the implementation of ideas that make the business worse.</p>
-
 
 
 
@@ -192,7 +188,6 @@
 <p>Because point estimates will almost always differ from the true parameters, and the true parameters are unknown, sample size calculations will be wrong. They are still useful: a sample size calculation based on reasonable estimates puts you in the right ballpark, and the alternative — running experiments with no sample size planning at all — is worse.</p>
 
 
-
 </section>
 
  ]]></description>
@@ -221,7 +216,6 @@
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <p>[1] Ebbes, P., Papies, D., &amp; van Heerde, H. J. (2011). The Sense and Non-Sense of Holdout Sample Validation in the Presence of Endogeneity. <em>Marketing Science</em>, <em>30</em>(6), 1115-1122.</p>
 <p>[2] A New Gold Standard for Digital Ad Measurement: <a href="https://hbr.org/2023/03/a-new-gold-standard-for-digital-ad-measurement" class="uri">https://hbr.org/2023/03/a-new-gold-standard-for-digital-ad-measurement</a></p>
-
 
 
 </section>
@@ -265,7 +259,6 @@
 <!-- TODO: Add reference [1] on lagged effects in geotesting -->
 
 
-
 </section>
 
  ]]></description>
@@ -302,7 +295,6 @@
 <p>[2] Bayesian Methods for Media Mix Modeling with Carryover and Shape Effects. <a href="https://research.google/pubs/bayesian-methods-for-media-mix-modeling-with-carryover-and-shape-effects/" class="uri">https://research.google/pubs/bayesian-methods-for-media-mix-modeling-with-carryover-and-shape-effects/</a></p>
 
 
-
 </section>
 
  ]]></description>
@@ -336,7 +328,6 @@
 
 
 
-
  ]]></description>
   <guid>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/geotesting-investment/linkedin.html</guid>
   <pubDate>Sun, 30 Mar 2025 00:00:00 GMT</pubDate>
@@ -357,7 +348,6 @@
 <p>Essentially, we are interested in the long-term impact on Y, but we only get short-term results on Z. This is a slippery slope: we must combine evidence from the test with additional untestable assumptions to infer from short-term Z (what we measure) to long-term Y (what we actually care about). This can work! But maybe it does not. Also: getting reliable short-term results on Z can already be challenging (e.g., interference, data quality, etc.).</p>
 <p>Now, we need to do something and A/B tests may be better than the alternatives in many cases. But in my opinion, the label “gold standard” is attached too often to results that don’t deserve it.</p>
 <p>Back to the original question: should we really call A/B testing the “gold standard for causal inference” in marketing and tech?</p>
-
 
 
 
@@ -389,7 +379,6 @@
 
 
 
-
  ]]></description>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/06-synthetic-control/synthetic-control-intro/linkedin.html</guid>
   <pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate>
@@ -409,7 +398,6 @@
 <p>Launch marketing in a few test regions and keep others as control (or exclude). If the marketing works great you can gradually add more regions (that’s advanced and not always possible) or go national.</p>
 <p>The same can be done when budget needs to be cut: cut first in test regions and keep a few controls. Depending on the reaction and setup you can additionally cut in some control/exclude regions later. (That is advanced as well, and not always possible.)</p>
 <p>Distribute your budget so that you learn while you earn!</p>
-
 
 
 
@@ -443,7 +431,6 @@
 <p>The higher N, X, and Y, the better.</p>
 <p>For example, if 50% of users, instead of 10%, had an average incremental profit of $2 per customer, the situation would be completely different: 50% × 1,000,000 customers × $2/customer = $1,000,000.</p>
 <p>Personalization with causal ML holds great potential, but it’s essential to do this math.</p>
-
 
 
 
@@ -486,7 +473,6 @@
 
 
 
-
  ]]></description>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/ab-tests-as-factorial/linkedin.html</guid>
   <pubDate>Fri, 18 Oct 2024 00:00:00 GMT</pubDate>
@@ -510,7 +496,6 @@
 <p>Here are two posts that I found useful to answer these questions.</p>
 <p>First, Jonathan Bartlett wrote a blog post on the topic fixed vs.&nbsp;random parameters in bayesian statistics: <a href="https://lnkd.in/g9H425-r" class="uri">https://lnkd.in/g9H425-r</a></p>
 <p>Second, a great discussion about parameters and the DGP in bayesian statistics can be found on CrossValidated, where the quote from the beginning of this post is coming from: <a href="https://lnkd.in/gWNbEeXy" class="uri">https://lnkd.in/gWNbEeXy</a></p>
-
 
 
 
@@ -539,7 +524,6 @@
 
 
 
-
  ]]></description>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/factorial-experiments-large-samples/linkedin.html</guid>
   <pubDate>Mon, 25 Mar 2024 00:00:00 GMT</pubDate>
@@ -555,7 +539,6 @@
 <p>What makes statistics and causal inference so difficult to understand?</p>
 <p>In my opinion the underlying logic: it’s about considering cases that could have happened, but didn’t, for summarised comparisons between reality and hypothetical scenarios that did not exist, but would have, if we had things done differently.</p>
 <p>This way of thinking is simply not intuitive.</p>
-
 
 
 
@@ -588,7 +571,6 @@
 
 
 
-
  ]]></description>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/preplanned-analysis-as-if-randomization/linkedin.html</guid>
   <pubDate>Wed, 13 Mar 2024 00:00:00 GMT</pubDate>
@@ -610,7 +592,6 @@
 <p>“We combine both empirical and field studies. On the one hand, we use a dataset from one of Europe’s leading DTC firms that includes 2,808 influencer-specific discount codes, allowing us to attribute 1,881,533 sold products (with total value over €17 M in revenue) to 2,808 unique sponsored postings on Instagram by 1,698 nano, micro, and macro influencers (three influencer followership levels, where nano refers to low-followership influencers and macro to high-followership influencers (e.g., Van den Bulte and Wuyts 2007)). On the other hand, collaborating with two DTC firms, we run three distinct field studies with a total of 319 paid nano and macro influencers (also on Instagram).”</p>
 </blockquote>
 <p><strong>Paper:</strong> Beichert, Maximilian, Andreas Bayerl, Jacob Goldenberg, and Andreas Lanz (2023), “Revenue Generation through Influencer Marketing,” <em>Journal of Marketing</em>, Forthcoming.</p>
-
 
 
 
@@ -642,7 +623,6 @@
 <p>[1] Keele, L. (2015). The statistics of causal inference: A view from political methodology. <em>Political Analysis</em>, 23(3), 313–335.</p>
 <p>[2] Lewbel, A. (2019). The identification zoo: Meanings of identification in econometrics. <em>Journal of Economic Literature</em>, 57(4), 835–903.</p>
 <p>[3] Basse, G., &amp; Bojinov, I. (2020). A general theory of identification. <em>arXiv preprint</em> arXiv:2002.06041.</p>
-
 
 
 </section>

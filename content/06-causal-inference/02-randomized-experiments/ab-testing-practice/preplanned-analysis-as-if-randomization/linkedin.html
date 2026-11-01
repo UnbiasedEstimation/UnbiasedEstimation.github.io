@@ -75,40 +75,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -209,7 +180,6 @@ window.Quarto = {
 <p>“The injunction to ‘analyze the way you randomize’ is well-known to statisticians since Fisher advocated for randomization as the basis of inference. Yet even those convinced by the merits of randomization-based inference seldom follow this injunction to the letter. Bernoulli randomized experiments are often analyzed as completely randomized experiments, and completely randomized experiments are analyzed as if they had been stratified; more generally, it is not uncommon to analyze an experiment as if it had been randomized differently. This paper examines the theoretical foundation behind this practice within a randomization-based framework. Specifically, we ask when is it legitimate to analyze an experiment randomized according to one design as if it had been randomized according to some other design. We show that a sufficient condition for this type of analysis to be valid is that the design used for analysis be derived from the original design by an appropriate form of conditioning. We use our theory to justify certain existing methods, question others, and finally suggest new methodological insights such as conditioning on approximate covariate balance.”</p>
 </blockquote>
 <p>Very interesting!</p>
-
 
 
 

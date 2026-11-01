@@ -76,40 +76,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -226,7 +197,6 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <p>[1] Wasserman, L. (2004). <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer Science &amp; Business Media. <a href="https://lnkd.in/e-HMEz6Z" class="uri">https://lnkd.in/e-HMEz6Z</a></p>
 <p>[2] Kleijn, B. (2022). <em>The Frequentist Theory of Bayesian Statistics</em>. <a href="https://lnkd.in/eMjpgtT5" class="uri">https://lnkd.in/eMjpgtT5</a></p>
-
 
 
 </section>

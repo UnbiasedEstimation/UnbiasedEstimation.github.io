@@ -75,40 +75,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -204,7 +175,6 @@ window.Quarto = {
 <p>“We combine both empirical and field studies. On the one hand, we use a dataset from one of Europe’s leading DTC firms that includes 2,808 influencer-specific discount codes, allowing us to attribute 1,881,533 sold products (with total value over €17 M in revenue) to 2,808 unique sponsored postings on Instagram by 1,698 nano, micro, and macro influencers (three influencer followership levels, where nano refers to low-followership influencers and macro to high-followership influencers (e.g., Van den Bulte and Wuyts 2007)). On the other hand, collaborating with two DTC firms, we run three distinct field studies with a total of 319 paid nano and macro influencers (also on Instagram).”</p>
 </blockquote>
 <p><strong>Paper:</strong> Beichert, Maximilian, Andreas Bayerl, Jacob Goldenberg, and Andreas Lanz (2023), “Revenue Generation through Influencer Marketing,” <em>Journal of Marketing</em>, Forthcoming.</p>
-
 
 
 

@@ -75,40 +75,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -204,7 +175,6 @@ window.Quarto = {
 <p>The result? A lot of causal ML driven personalization projects end up in the same situation as the typical underpowered A/B test. If statistical inference is done correctly, most of the time you just collect non-significant results, since your confidence intervals are too wide.</p>
 <p>Unfortunately it’s easy to generate “some” results by looping through a lot of subgroups, pick 10 different causal ML algorithms until one of them “delivers”. In this case a lot of the rules that causal ML discovered (i.e.&nbsp;“send coupons to customers who did not spend in the previous 120 days, but visited the app twice”) will be incorrect. For example, you think that your coupon campaign is at least break even, while in reality it’s burning a lot of money. Your effectiveness estimates (i.e.&nbsp;“if we use targeting with causal ML, coupons generate +7.8% revenue per customer”) can be systematically biased.</p>
 <p>In some cases personalization with causal AI might work great, but if you run into the mentioned low-power setup, things get difficult!</p>
-
 
 
 

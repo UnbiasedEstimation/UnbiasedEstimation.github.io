@@ -75,40 +75,11 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-fixed quarto-light">none
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../../../styles.css">
+</head>
 
-
-
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -212,7 +183,6 @@ window.Quarto = {
 <p>[1] Baum, C. F. (2011, July). An interpretation and implementation of the Theil-Goldberger ‘mixed’ estimator. In CHI11 Stata Conference (No.&nbsp;14). Stata Users Group.</p>
 <p>[2] Greene, W.H. (2003) <em>Econometric Analysis</em>. 5th Edition, Prentice Hall, Upper Saddle River. ch.&nbsp;16.2.2.d, p.&nbsp;436, footnote 9.</p>
 <p>[3] Frank Harrell — referenced via LinkedIn shortlink in the original post.</p>
-
 
 
 </section>
