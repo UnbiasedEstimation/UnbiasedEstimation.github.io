@@ -134,6 +134,9 @@ for path in src_root.rglob("*"):
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(strip_keys(path.read_text(encoding="utf-8")), encoding="utf-8")
     shutil.copystat(path, dest)
+    # Copy sibling bibliography files (papers declare `bibliography: references.bib`)
+    for bib in path.parent.glob("*.bib"):
+        shutil.copy2(bib, dest.parent / bib.name)
     # Copy sibling asset folders (figures/, images/, assets/)
     for asset_dir in ("figures", "images", "assets"):
         src_asset = path.parent / asset_dir
