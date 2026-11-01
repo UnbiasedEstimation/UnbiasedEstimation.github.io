@@ -2,9 +2,9 @@
 title: "Papers"
 listing:
   contents:
-    - _content/**/paper.qmd
-    - _content/**/paper.ipynb
-    - _content/**/paper.tex
+    - content/**/paper.qmd
+    - content/**/paper.ipynb
+    - content/**/paper.tex
   type: default
   fields: [date, title, description]
   sort: "date desc"

@@ -28,7 +28,7 @@ quarto preview
 quarto publish gh-pages
 ```
 
-The `_content/` directory is gitignored and populated only by the sync script. To re-sync after flipping `publish-to-website` on an article in the content repo, just run `./scripts/sync-content.sh` again.
+The `content/` directory is gitignored and populated only by the sync script. Its name must not start with `_`, because Quarto skips such directories when rendering. To re-sync after flipping `publish-to-website` on an article in the content repo, just run `./scripts/sync-content.sh` again.
 
 ## Repo layout
 
@@ -43,8 +43,8 @@ The `_content/` directory is gitignored and populated only by the sync script. T
 ├── styles.css                   Site-wide CSS tweaks
 ├── scripts/
 │   └── sync-content.sh          Filter + copy from UnbiasedEstimation/content
-├── _content/                    Synced articles (gitignored)
-├── _content_src/                Source clone of content repo (gitignored)
+├── content/                     Synced articles (gitignored)
+├── _content_src/                Source clone of content repo (gitignored; the _ keeps Quarto from rendering drafts)
 ├── _site/                       Built site output (gitignored)
 └── .github/workflows/           CI (deferred — currently empty placeholder)
 ```

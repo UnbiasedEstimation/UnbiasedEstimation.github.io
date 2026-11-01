@@ -1,23 +1,27 @@
 #!/usr/bin/env bash
-# Sync articles from UnbiasedEstimation/content into the local _content/
+# Sync articles from UnbiasedEstimation/content into the local content/
 # directory, filtered by the `publish-to-website: true` frontmatter flag.
+#
+# content/ must not start with "_": Quarto skips such directories when
+# rendering. _content_src/ keeps its underscore so the full clone, drafts
+# included, is never rendered.
 #
 # Behavior:
 #  1. Clones (or pulls latest) UnbiasedEstimation/content into _content_src/.
 #  2. Walks every .qmd and .md file under _content_src/content/.
 #  3. Reads each file's YAML frontmatter; checks `publish-to-website`.
 #  4. If true, copies the file + sibling assets (figures/, images/) into
-#     _content/ preserving the relative directory structure.
+#     content/ preserving the relative directory structure.
 #  5. Writes a manifest of synced files to .last-sync.txt.
 #
-# Idempotent — running again wipes _content/ and re-copies.
+# Idempotent — running again wipes content/ and re-copies.
 
 set -euo pipefail
 
 SITE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SRC_REPO="git@github.com:UnbiasedEstimation/content.git"
 SRC_DIR="${SITE_ROOT}/_content_src"
-DEST_DIR="${SITE_ROOT}/_content"
+DEST_DIR="${SITE_ROOT}/content"
 MANIFEST="${SITE_ROOT}/.last-sync.txt"
 SRC_BRANCH="${SRC_BRANCH:-main}"
 
@@ -40,7 +44,7 @@ else
   git clone --depth=1 --branch "$SRC_BRANCH" --quiet "$SRC_REPO" "$SRC_DIR"
 fi
 
-# Step 2: clean _content/ and recreate
+# Step 2: clean content/ and recreate
 echo "[sync] wiping $DEST_DIR ..."
 rm -rf "$DEST_DIR"
 mkdir -p "$DEST_DIR"

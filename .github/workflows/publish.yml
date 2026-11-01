@@ -39,9 +39,15 @@ jobs:
           chmod +x scripts/sync-content.sh
           ./scripts/sync-content.sh
 
-      - name: Render and publish to gh-pages
+      # Render HTML only. Some articles also declare a pdf format, which would
+      # need a LaTeX install the runner doesn't have.
+      - name: Render site (HTML only)
+        run: quarto render --to html
+
+      - name: Publish to gh-pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

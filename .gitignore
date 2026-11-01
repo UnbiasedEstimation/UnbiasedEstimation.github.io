@@ -4,7 +4,7 @@ _freeze/
 .quarto/
 
 # Synced content (pulled in at build time from the content repo)
-_content/
+content/
 _content_src/
 
 # Last sync manifest

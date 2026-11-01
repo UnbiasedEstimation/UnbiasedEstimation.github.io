@@ -2,8 +2,8 @@
 title: "Blog"
 listing:
   contents:
-    - _content/**/index.qmd
-    - _content/**/linkedin.md
+    - content/**/index.qmd
+    - content/**/linkedin.md
   exclude:
     filename: "paper.*"
   type: default

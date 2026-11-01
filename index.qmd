@@ -4,8 +4,8 @@ toc: false
 listing:
   - id: recent
     contents:
-      - _content/**/*.qmd
-      - _content/**/*.md
+      - content/**/*.qmd
+      - content/**/*.md
     type: default
     fields: [date, title, description]
     sort: "date desc"
