@@ -2,18 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://unbiasedestimation.github.io/index.html</loc>
-    <lastmod>2026-11-01T22:27:39.598Z</lastmod>
+    <lastmod>2026-11-01T22:38:57.769Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/bayesian/inference-as-frequentist/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/bayesian/mixed-estimation-vs-bayesian/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/bayesian/wasserman-on-bayesian/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/general/counterfactual-thinking-is-hard/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/01-mmm/out-of-sample-overhyped/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/06-marketing-science/direct-mail-measurement/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.174Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/formulating-impacts-precisely/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.173Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/geotesting-investment/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.173Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/01-treatment-effects/identification-zoo/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.165Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/power-and-sample-size/sample-size-calculations-wrong-but-useful/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/personalization/personalization-pitfall/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/ab-tests-as-factorial/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/preplanned-analysis-as-if-randomization/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/factorial-experiments-large-samples/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
   </url>
   <url>
     <loc>https://unbiasedestimation.github.io/cv.html</loc>
-    <lastmod>2026-11-01T22:27:39.598Z</lastmod>
+    <lastmod>2026-11-01T22:38:57.769Z</lastmod>
   </url>
   <url>
     <loc>https://unbiasedestimation.github.io/papers.html</loc>
-    <lastmod>2026-11-01T22:27:39.598Z</lastmod>
+    <lastmod>2026-11-01T22:38:57.769Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/multigroup-covariate-adjustment/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/ab-testing-gold-standard-critique/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/advanced-techniques-dont-work/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/warren-buffett-ab-testing/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/personalization/personalization-overhyped/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/power-and-sample-size/longer-tests-decrease-power/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/06-causal-inference/06-synthetic-control/synthetic-control-intro/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/always-on-bias/index.html</loc>
+    <lastmod>2026-11-01T22:39:09.173Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/geotest-before-going-national/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.173Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/07-industry/06-marketing-science/influencer-marketing-roi/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.174Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/general/all-models-are-wrong-pushback/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/confidence-intervals/confidence-vs-credible-intervals/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.164Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/bayesian/fraud-and-the-bayesian-debate/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.163Z</lastmod>
+  </url>
+  <url>
+    <loc>https://unbiasedestimation.github.io/content/03-statistics/bayesian/bayesian-parameters-fixed/linkedin.html</loc>
+    <lastmod>2026-11-01T22:39:09.163Z</lastmod>
   </url>
   <url>
     <loc>https://unbiasedestimation.github.io/blog.html</loc>
-    <lastmod>2026-11-01T22:27:39.598Z</lastmod>
+    <lastmod>2026-11-01T22:38:57.769Z</lastmod>
   </url>
 </urlset>
