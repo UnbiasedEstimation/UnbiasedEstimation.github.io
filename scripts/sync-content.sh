@@ -88,10 +88,12 @@ def parse_frontmatter(path):
         fm[key] = val
     return fm
 
-# Our own frontmatter keys that share a name with a Quarto option. Quarto
-# validates them on every page, so they are dropped from the copy.
+# Our own frontmatter keys whose names Quarto or Pandoc already use, so they
+# are dropped from the copy. (No backticks in this heredoc: bash would run
+# their contents as a command.)
 STRIP_KEYS = (
     "progress",  # reveal.js option, must be boolean; ours is a percentage
+    "math",      # Pandoc template variable holding the MathJax script tag
 )
 
 def strip_keys(text):
@@ -108,6 +110,29 @@ def strip_keys(text):
             skipping = m.group(1) in STRIP_KEYS
         if not skipping:
             kept.append(line)
+    return text[:4] + "".join(kept) + text[end:]
+
+def strip_pdf_format(text):
+    """Remove the pdf entry under format: in the frontmatter."""
+    if not text.startswith("---"):
+        return text
+    end = text.find("\n---", 4)
+    if end == -1:
+        return text
+    kept, in_format, pdf_indent = [], False, None
+    for line in text[4:end].splitlines(keepends=True):
+        indent = len(line) - len(line.lstrip())
+        if pdf_indent is not None:
+            if line.strip() and indent <= pdf_indent:
+                pdf_indent = None
+            else:
+                continue
+        if indent == 0 and line.strip():
+            in_format = line.startswith("format:")
+        elif in_format and re.match(r"^\s+pdf\s*:", line):
+            pdf_indent = indent
+            continue
+        kept.append(line)
     return text[:4] + "".join(kept) + text[end:]
 
 count_total = 0
@@ -132,9 +157,18 @@ for path in src_root.rglob("*"):
     rel = path.relative_to(src_root)
     dest = dest_root / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text(strip_keys(path.read_text(encoding="utf-8")), encoding="utf-8")
+    text = strip_keys(path.read_text(encoding="utf-8"))
+    # The site renders HTML only, but Quarto still links a PDF for a declared
+    # pdf format. Ship the content repo's rendered PDF if there is one;
+    # otherwise drop the pdf format so no dead link appears.
+    pdf = path.with_suffix(".pdf")
+    if pdf.is_file():
+        shutil.copy2(pdf, dest.with_suffix(".pdf"))
+    else:
+        text = strip_pdf_format(text)
+    dest.write_text(text, encoding="utf-8")
     shutil.copystat(path, dest)
-    # Copy sibling bibliography files (papers declare `bibliography: references.bib`)
+    # Copy sibling bibliography files (papers declare a references.bib)
     for bib in path.parent.glob("*.bib"):
         shutil.copy2(bib, dest.parent / bib.name)
     # Copy sibling asset folders (figures/, images/, assets/)

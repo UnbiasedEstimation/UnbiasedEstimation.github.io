@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: _site
+  # Rendered PDFs copied in by the sync script (linked from their HTML pages)
+  resources:
+    - "content/**/*.pdf"
 
 website:
   title: "Oliver Brose"
