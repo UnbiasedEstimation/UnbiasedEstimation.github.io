@@ -37,6 +37,8 @@ format:
   html:
     theme: cosmo
     css: styles.css
+    template-partials:
+      - _partials/title-metadata.html
     toc: true
     code-copy: true
     smooth-scroll: true

@@ -41,6 +41,7 @@ The `content/` directory is gitignored and populated only by the sync script. It
 ├── cv.qmd                       CV page (text + link to cv.pdf)
 ├── cv.pdf                       Downloadable CV (generated from content repo's cv/ LaTeX)
 ├── styles.css                   Site-wide CSS tweaks
+├── _partials/title-metadata.html  Quarto title partial: adds "on LinkedIn" link after the date
 ├── scripts/
 │   └── sync-content.sh          Filter + copy from UnbiasedEstimation/content
 ├── content/                     Synced articles (gitignored)

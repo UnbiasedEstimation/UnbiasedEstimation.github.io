@@ -135,6 +135,29 @@ def strip_pdf_format(text):
         kept.append(line)
     return text[:4] + "".join(kept) + text[end:]
 
+def linkedin_meta(text, fm):
+    """For posts first published on LinkedIn, date them by the LinkedIn post
+    and add linkedin-url, which _partials/title-metadata.html renders as
+    "<date> on LinkedIn" with the link."""
+    url = fm.get("published-url", "")
+    if "linkedin.com/" not in url or not text.startswith("---"):
+        return text
+    end = text.find("\n---", 4)
+    if end == -1:
+        return text
+    lines = text[4:end].splitlines(keepends=True)
+    pub = fm.get("published-date", "")
+    if pub:
+        lines = [("date: " + pub + "\n") if re.match(r"^date\s*:", l) else l for l in lines]
+    if lines and not lines[-1].endswith("\n"):
+        lines[-1] += "\n"
+    # Metadata strings are parsed as Markdown, which turns "--" in a URL into
+    # an en dash. Pass the URL as a raw HTML inline so it reaches the page
+    # verbatim. chr(96) is a backtick; a literal one would be run by bash here.
+    bt = chr(96)
+    lines.append('linkedin-url: "' + bt + url + bt + '{=html}"')
+    return text[:4] + "".join(lines) + text[end:]
+
 count_total = 0
 count_kept = 0
 synced = []
@@ -157,7 +180,7 @@ for path in src_root.rglob("*"):
     rel = path.relative_to(src_root)
     dest = dest_root / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
-    text = strip_keys(path.read_text(encoding="utf-8"))
+    text = linkedin_meta(strip_keys(path.read_text(encoding="utf-8")), fm)
     # The site renders HTML only, but Quarto still links a PDF for a declared
     # pdf format. Ship the content repo's rendered PDF if there is one;
     # otherwise drop the pdf format so no dead link appears.
