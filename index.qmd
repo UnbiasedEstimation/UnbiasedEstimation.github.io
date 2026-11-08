@@ -1,5 +1,6 @@
 ---
-title: "Oliver Brose"
+# No title: the navbar brand already shows the name. pagetitle keeps the browser tab.
+pagetitle: "Oliver Brose"
 toc: false
 listing:
   - id: recent
