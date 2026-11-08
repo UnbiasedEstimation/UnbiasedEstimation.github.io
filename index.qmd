@@ -18,7 +18,7 @@ title-block-banner: false
 
 ::: {.hero-banner}
 
-7+ years experience in data analysis & data science, with focus on marketing & product.
+My name is Oliver Brose. I am a Data Scientist with 7+ years of experience in data analysis & data science, with a focus on marketing & product.
 
 Worked on projects that range from daily reporting & monitoring, causal inference (A/B testing, geographic experimentation, synthetic control studies, marketing mix modeling) and machine learning & data mining (churn prediction, customer segmentation, basket analysis).
 
