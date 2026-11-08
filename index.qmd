@@ -17,8 +17,6 @@ title-block-banner: false
 
 ::: {.hero-banner}
 
-# Oliver Brose
-
 Data science and marketing measurement.
 
 I write about Bayesian / frequentist statistics, causal inference, A/B testing, MMM, geo-testing, and synthetic control — mostly from a practitioner's perspective.
