@@ -47,3 +47,7 @@ format:
     footnotes-hover: true
 
 freeze: auto
+
+# Article descriptions feed the listings and link previews only; the post page
+# starts with the article text, as on LinkedIn.
+hide-description: true
