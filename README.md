@@ -64,6 +64,8 @@ publish-to-website: true
 
 To remove an article from the site, either delete that line or set it to `false`. Re-run the sync + render + publish cycle.
 
+Blog categories are not set in the content repo: the sync derives them from each article's `topics` (and a few `tags`) via `CATEGORY_TOPICS` / `CATEGORY_TAGS` in `scripts/sync-content.sh`, and prints any topic that has no category yet. An article that sets its own `categories` keeps them.
+
 The site only includes articles with the flag set to `true`. Drafts, ideas, and `status: published` LinkedIn pieces are all opt-in independently.
 
 ## Deferred / TODO

@@ -52,6 +52,7 @@ mkdir -p "$DEST_DIR"
 # Step 3-4: filter and copy. Use Python for robust YAML parsing.
 echo "[sync] filtering by publish-to-website: true ..."
 python3 - <<PYEOF
+import json
 import os
 import re
 import shutil
@@ -158,6 +159,57 @@ def linkedin_meta(text, fm):
     lines.append('linkedin-url: "' + bt + url + bt + '{=html}"')
     return text[:4] + "".join(lines) + text[end:]
 
+# Website categories, built from the content repo's topics (and a few tags
+# where the topic alone misses a post). A post gets every category it matches.
+CATEGORY_TOPICS = {
+    "A/B testing": ["experimentation", "ab-testing", "randomized-experiments"],
+    "Experimental design": ["design-of-experiments"],
+    "Power & sample size": ["power-analysis", "covariate-adjustment"],
+    "Personalization & causal ML": ["personalization", "causal-ml"],
+    "Causal inference": ["causal-inference", "identification", "treatment-effects", "econometrics", "synthetic-control"],
+    "Geo-testing": ["geotesting"],
+    "Marketing measurement": ["marketing-measurement", "incrementality", "ROI", "ROAS", "lagged-effects",
+                              "marketing-science", "influencer-marketing", "direct-mail"],
+    "Marketing mix modeling": ["mmm"],
+    "Bayesian vs. frequentist": ["bayesian", "frequentist", "estimation", "confidence-intervals"],
+    "Statistical thinking": ["statistics", "philosophy", "statistical-philosophy", "fraud", "model-selection"],
+}
+CATEGORY_TAGS = {
+    "variance-reduction": "Power & sample size",
+    "geotest": "Geo-testing",
+    "mmm": "Marketing mix modeling",
+}
+TOPIC_CATEGORY = {t: c for c, ts in CATEGORY_TOPICS.items() for t in ts}
+unmapped_topics = {}
+
+def flow_list(raw, key):
+    """Items of a YAML flow list like  key: [a, b]  (may wrap over lines)."""
+    m = re.search(r"^" + key + r":\s*\[(.*?)\]", raw, re.M | re.S)
+    return [x.strip().strip("\"'") for x in m.group(1).split(",") if x.strip()] if m else []
+
+def add_categories(text, rel):
+    """Add a categories list derived from topics/tags, unless the post has one."""
+    if not text.startswith("---"):
+        return text
+    end = text.find("\n---", 4)
+    if end == -1:
+        return text
+    raw = text[4:end]
+    if re.search(r"^categories\s*:", raw, re.M):
+        return text
+    cats = []
+    for t in flow_list(raw, "topics"):
+        if t in TOPIC_CATEGORY:
+            cats.append(TOPIC_CATEGORY[t])
+        else:
+            unmapped_topics.setdefault(t, []).append(str(rel))
+    cats += [CATEGORY_TAGS[t] for t in flow_list(raw, "tags") if t in CATEGORY_TAGS]
+    cats = [c for c in CATEGORY_TOPICS if c in cats]   # dedupe, fixed order
+    if not cats:
+        return text
+    sep = "" if raw.endswith("\n") else "\n"
+    return text[:end] + sep + "categories: " + json.dumps(cats, ensure_ascii=False) + text[end:]
+
 count_total = 0
 count_kept = 0
 synced = []
@@ -181,6 +233,7 @@ for path in src_root.rglob("*"):
     dest = dest_root / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
     text = linkedin_meta(strip_keys(path.read_text(encoding="utf-8")), fm)
+    text = add_categories(text, rel)
     # The site renders HTML only, but Quarto still links a PDF for a declared
     # pdf format. Ship the content repo's rendered PDF if there is one;
     # otherwise drop the pdf format so no dead link appears.
@@ -211,6 +264,8 @@ manifest.write_text(
     + "\n"
 )
 print(f"[sync] kept {count_kept} of {count_total} articles")
+for topic, files in sorted(unmapped_topics.items()):
+    print(f"[sync] topic without a website category: {topic} ({', '.join(files)})")
 print(f"[sync] manifest: {manifest}")
 PYEOF
 
