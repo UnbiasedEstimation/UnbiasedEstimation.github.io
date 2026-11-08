@@ -49,6 +49,8 @@
 </section>
 
  ]]></description>
+  <category>Geo-testing</category>
+  <category>Marketing measurement</category>
   <guid>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/always-on-bias/</guid>
   <pubDate>Mon, 31 Mar 2025 00:00:00 GMT</pubDate>
 </item>
@@ -80,6 +82,8 @@
 
 
  ]]></description>
+  <category>Geo-testing</category>
+  <category>Marketing measurement</category>
   <guid>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/geotesting-investment/linkedin.html</guid>
   <pubDate>Sun, 30 Mar 2025 00:00:00 GMT</pubDate>
 </item>
@@ -127,6 +131,8 @@
 </section>
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Power &amp; sample size</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/power-and-sample-size/sample-size-calculations-wrong-but-useful/</guid>
   <pubDate>Sat, 29 Mar 2025 00:00:00 GMT</pubDate>
 </item>
@@ -154,6 +160,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Power &amp; sample size</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/advanced-techniques-dont-work/</guid>
   <pubDate>Wed, 26 Mar 2025 00:00:00 GMT</pubDate>
 </item>
@@ -184,6 +192,7 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/warren-buffett-ab-testing/</guid>
   <pubDate>Wed, 26 Mar 2025 00:00:00 GMT</pubDate>
 </item>
@@ -220,6 +229,8 @@
 </section>
 
  ]]></description>
+  <category>Causal inference</category>
+  <category>Geo-testing</category>
   <guid>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/formulating-impacts-precisely/</guid>
   <pubDate>Mon, 24 Feb 2025 00:00:00 GMT</pubDate>
 </item>
@@ -243,6 +254,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Causal inference</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/ab-testing-gold-standard-critique/linkedin.html</guid>
   <pubDate>Mon, 20 Jan 2025 00:00:00 GMT</pubDate>
 </item>
@@ -271,6 +284,9 @@
 
 
  ]]></description>
+  <category>Causal inference</category>
+  <category>Geo-testing</category>
+  <category>Marketing measurement</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/06-synthetic-control/synthetic-control-intro/linkedin.html</guid>
   <pubDate>Fri, 10 Jan 2025 00:00:00 GMT</pubDate>
 </item>
@@ -293,6 +309,8 @@
 
 
  ]]></description>
+  <category>Geo-testing</category>
+  <category>Marketing measurement</category>
   <guid>https://unbiasedestimation.github.io/content/07-industry/04-geotesting/geotest-before-going-national/linkedin.html</guid>
   <pubDate>Mon, 30 Dec 2024 00:00:00 GMT</pubDate>
 </item>
@@ -326,6 +344,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Personalization &amp; causal ML</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/personalization/personalization-pitfall/</guid>
   <pubDate>Fri, 29 Nov 2024 00:00:00 GMT</pubDate>
 </item>
@@ -365,6 +385,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Experimental design</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/ab-tests-as-factorial/linkedin.html</guid>
   <pubDate>Fri, 18 Oct 2024 00:00:00 GMT</pubDate>
 </item>
@@ -391,6 +413,8 @@
 
 
  ]]></description>
+  <category>Bayesian vs. frequentist</category>
+  <category>Statistical thinking</category>
   <guid>https://unbiasedestimation.github.io/content/03-statistics/bayesian/bayesian-parameters-fixed/linkedin.html</guid>
   <pubDate>Tue, 26 Mar 2024 00:00:00 GMT</pubDate>
 </item>
@@ -416,6 +440,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Experimental design</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/factorial-experiments-large-samples/linkedin.html</guid>
   <pubDate>Mon, 25 Mar 2024 00:00:00 GMT</pubDate>
 </item>
@@ -434,6 +460,8 @@
 
 
  ]]></description>
+  <category>Causal inference</category>
+  <category>Statistical thinking</category>
   <guid>https://unbiasedestimation.github.io/content/03-statistics/general/counterfactual-thinking-is-hard/linkedin.html</guid>
   <pubDate>Wed, 13 Mar 2024 00:00:00 GMT</pubDate>
 </item>
@@ -463,6 +491,8 @@
 
 
  ]]></description>
+  <category>A/B testing</category>
+  <category>Causal inference</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/02-randomized-experiments/ab-testing-practice/preplanned-analysis-as-if-randomization/linkedin.html</guid>
   <pubDate>Wed, 13 Mar 2024 00:00:00 GMT</pubDate>
 </item>
@@ -487,6 +517,7 @@
 
 
  ]]></description>
+  <category>Marketing measurement</category>
   <guid>https://unbiasedestimation.github.io/content/07-industry/06-marketing-science/influencer-marketing-roi/linkedin.html</guid>
   <pubDate>Tue, 23 Jan 2024 00:00:00 GMT</pubDate>
 </item>
@@ -522,6 +553,8 @@
 </section>
 
  ]]></description>
+  <category>Bayesian vs. frequentist</category>
+  <category>Statistical thinking</category>
   <guid>https://unbiasedestimation.github.io/content/03-statistics/bayesian/wasserman-on-bayesian/</guid>
   <pubDate>Sun, 07 Jan 2024 00:00:00 GMT</pubDate>
 </item>
@@ -554,6 +587,7 @@
 </section>
 
  ]]></description>
+  <category>Causal inference</category>
   <guid>https://unbiasedestimation.github.io/content/06-causal-inference/01-treatment-effects/identification-zoo/linkedin.html</guid>
   <pubDate>Sun, 07 Jan 2024 00:00:00 GMT</pubDate>
 </item>
@@ -598,6 +632,8 @@
 </section>
 
  ]]></description>
+  <category>Bayesian vs. frequentist</category>
+  <category>Statistical thinking</category>
   <guid>https://unbiasedestimation.github.io/content/03-statistics/bayesian/inference-as-frequentist/</guid>
   <pubDate>Sun, 31 Dec 2023 00:00:00 GMT</pubDate>
 </item>
@@ -617,6 +653,7 @@
 
 
  ]]></description>
+  <category>Statistical thinking</category>
   <guid>https://unbiasedestimation.github.io/content/03-statistics/general/all-models-are-wrong-pushback/linkedin.html</guid>
   <pubDate>Sat, 30 Dec 2023 00:00:00 GMT</pubDate>
 </item>
