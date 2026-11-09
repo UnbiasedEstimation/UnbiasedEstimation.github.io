@@ -3,53 +3,34 @@ title: "CV"
 toc: false
 ---
 
+<!--
+Deliberately short until the new CV is written. Nothing here that is not
+already public on LinkedIn: no PDF, no email, no address.
+-->
+
 ::: {.cv-header}
 
-## Oliver Brose
+**Data Scientist** · Marketing measurement & incrementality
 
-Data scientist working on causal inference, A/B testing, and marketing measurement.
-
-[Download CV (PDF)](cv.pdf){.btn .btn-outline-primary .btn-sm}
+[<i class="bi bi-linkedin"></i> LinkedIn](https://www.linkedin.com/in/oliver-brose/){.btn .btn-outline-secondary .btn-sm}
+[<i class="bi bi-github"></i> GitHub](https://github.com/UnbiasedEstimation){.btn .btn-outline-secondary .btn-sm}
 
 :::
 
----
-
-<!--
-The downloadable cv.pdf lives at the repo root and is generated from the
-LaTeX templates in the content repo (UnbiasedEstimation/content) under
-the cv/ folder. To refresh the PDF:
-
-  1. Edit YAML content in UnbiasedEstimation/content/cv/content/*.yaml
-  2. Generate the .tex via the AI-assisted workflow described in
-     UnbiasedEstimation/content/cv/README.md
-  3. Compile to PDF with pdflatex
-  4. Copy the resulting PDF here as cv.pdf and commit it
-
-Future improvement: automate via CI (render LaTeX → PDF → commit on build).
--->
-
 ## Summary
 
-A short summary paragraph — replace with your own bio. Background, current role, key interests.
+7+ years as a Marketing Data Scientist/Analyst specializing in marketing measurement and incrementality. Built and maintained MMMs across ecommerce, finance, gambling & sports betting, and ad platforms; led geo-experimentation programs while building geo-testing tools to measure ROI across Google (Search/Display/YouTube), Meta, TikTok, X, email, and offline channels (radio, OOH).
 
 ## Experience
 
-- **Role · Company · Years** — One-line description.
-- **Role · Company · Years** — One-line description.
+Founder of Oliver Brose Consulting since 2023, with contract and project roles at Wolt, Growth by Science, Stella, RSTM, Impact Soundworks and GetYourGuide. Before that, Data Analyst at Zalando (2019–2023) and Data Scientist at Allyouneed (2018–2019). Details on [LinkedIn](https://www.linkedin.com/in/oliver-brose/).
 
 ## Education
 
-- **Degree · Institution · Year** — Brief detail.
+- **M.Sc. Statistics**, Humboldt University Berlin, 2016–2019
+- **B.Sc. Business Administration**, Humboldt University Berlin, 2012–2016
 
-## Selected publications
+## Writing
 
-See the [Papers](papers.qmd) page for the full list. Highlights:
-
-- Title of paper 1 — short description.
-- Title of paper 2 — short description.
-
-## Contact
-
-- GitHub: [UnbiasedEstimation](https://github.com/UnbiasedEstimation)
-- LinkedIn: [oliver-brose](https://www.linkedin.com/in/oliver-brose/)
+- Paper: [*The Analysis of Multigroup Randomized Experiments in Large Sample Setups*](content/06-causal-inference/02-randomized-experiments/large-sample-multigroup-rcts/paper.qmd)
+- Posts on A/B testing, causal inference, marketing measurement and statistics: see the [Blog](blog.qmd)

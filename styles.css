@@ -25,3 +25,13 @@
 .navbar .navbar-brand {
   font-weight: 600;
 }
+
+/* CV page header: role line and link buttons */
+.cv-header p:first-child {
+  font-size: 1.15rem;
+  margin-bottom: 0.9rem;
+}
+
+.cv-header .btn {
+  margin: 0 0.35rem 0.4rem 0;
+}
