@@ -172,49 +172,35 @@
     "href": "cv.html",
     "title": "CV",
     "section": "",
-    "text": "Data scientist working on causal inference, A/B testing, and marketing measurement.\nDownload CV (PDF)"
-  },
-  {
-    "objectID": "cv.html#oliver-brose",
-    "href": "cv.html#oliver-brose",
-    "title": "CV",
-    "section": "",
-    "text": "Data scientist working on causal inference, A/B testing, and marketing measurement.\nDownload CV (PDF)"
+    "text": "Data Scientist · Marketing measurement & incrementality\n LinkedIn  GitHub"
   },
   {
     "objectID": "cv.html#summary",
     "href": "cv.html#summary",
     "title": "CV",
     "section": "Summary",
-    "text": "Summary\nA short summary paragraph — replace with your own bio. Background, current role, key interests."
+    "text": "Summary\n7+ years as a Marketing Data Scientist/Analyst specializing in marketing measurement and incrementality. Built and maintained MMMs across ecommerce, finance, gambling & sports betting, and ad platforms; led geo-experimentation programs while building geo-testing tools to measure ROI across Google (Search/Display/YouTube), Meta, TikTok, X, email, and offline channels (radio, OOH)."
   },
   {
     "objectID": "cv.html#experience",
     "href": "cv.html#experience",
     "title": "CV",
     "section": "Experience",
-    "text": "Experience\n\nRole · Company · Years — One-line description.\nRole · Company · Years — One-line description."
+    "text": "Experience\nFounder of Oliver Brose Consulting since 2023, with contract and project roles at Wolt, Growth by Science, Stella, RSTM, Impact Soundworks and GetYourGuide. Before that, Data Analyst at Zalando (2019–2023) and Data Scientist at Allyouneed (2018–2019). Details on LinkedIn."
   },
   {
     "objectID": "cv.html#education",
     "href": "cv.html#education",
     "title": "CV",
     "section": "Education",
-    "text": "Education\n\nDegree · Institution · Year — Brief detail."
+    "text": "Education\n\nM.Sc. Statistics, Humboldt University Berlin, 2016–2019\nB.Sc. Business Administration, Humboldt University Berlin, 2012–2016"
   },
   {
-    "objectID": "cv.html#selected-publications",
-    "href": "cv.html#selected-publications",
+    "objectID": "cv.html#writing",
+    "href": "cv.html#writing",
     "title": "CV",
-    "section": "Selected publications",
-    "text": "Selected publications\nSee the Papers page for the full list. Highlights:\n\nTitle of paper 1 — short description.\nTitle of paper 2 — short description."
-  },
-  {
-    "objectID": "cv.html#contact",
-    "href": "cv.html#contact",
-    "title": "CV",
-    "section": "Contact",
-    "text": "Contact\n\nGitHub: UnbiasedEstimation\nLinkedIn: oliver-brose"
+    "section": "Writing",
+    "text": "Writing\n\nPaper: The Analysis of Multigroup Randomized Experiments in Large Sample Setups\nPosts on A/B testing, causal inference, marketing measurement and statistics: see the Blog"
   },
   {
     "objectID": "content/03-statistics/bayesian/mixed-estimation-vs-bayesian/linkedin.html",
